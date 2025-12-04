@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,7 +23,6 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "AboutUs", href: "/about" },
     { name: "Events", href: "/events" },
-    // Services handled separately (dropdown)
     { name: "Gallery", href: "/gallery" },
   ];
 
@@ -67,13 +66,13 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center space-x-8">
 
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className="text-white text-base font-medium hover:text-primary transition-all hover:scale-105"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
 
               {/* SERVICES DROPDOWN — DESKTOP */}
@@ -107,7 +106,6 @@ export default function Navbar() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-
             </div>
           </div>
 
@@ -132,7 +130,9 @@ export default function Navbar() {
                   size="icon"
                   className="text-white hover:text-primary hover:bg-transparent transition-all hover:scale-110"
                 >
-                  <a href={social.href} target="_blank">{social.icon}</a>
+                  <a href={social.href} target="_blank" rel="noopener noreferrer">
+                    {social.icon}
+                  </a>
                 </Button>
               ))}
             </div>
@@ -171,14 +171,14 @@ export default function Navbar() {
                     {/* MOBILE MENU LINKS */}
                     <div className="flex flex-col space-y-6">
                       {navLinks.map((link) => (
-                        <a
+                        <Link
                           key={link.name}
-                          href={link.href}
+                          to={link.href}
                           onClick={handleMobileLinkClick}
                           className="text-xl font-semibold hover:text-primary transition-all"
                         >
                           {link.name}
-                        </a>
+                        </Link>
                       ))}
 
                       {/* SERVICES DROPDOWN — MOBILE */}
@@ -188,32 +188,33 @@ export default function Navbar() {
                         </button>
 
                         <div className="ml-4 mt-3 flex flex-col space-y-3 text-lg">
-                          <a
-                            href="/services/wedding-planning"
+
+                          <Link
+                            to="/services/wedding-planning"
                             onClick={handleMobileLinkClick}
                             className="text-white/80 hover:text-primary"
                           >
                             Wedding Planning
-                          </a>
+                          </Link>
 
-                          <a
-                            href="/services/corporate-events"
+                          <Link
+                            to="/services/corporate-events"
                             onClick={handleMobileLinkClick}
                             className="text-white/80 hover:text-primary"
                           >
                             Corporate Events
-                          </a>
+                          </Link>
 
-                          <a
-                            href="/services/private-parties"
+                          <Link
+                            to="/services/private-parties"
                             onClick={handleMobileLinkClick}
                             className="text-white/80 hover:text-primary"
                           >
                             Private Parties
-                          </a>
+                          </Link>
+
                         </div>
                       </div>
-
                     </div>
 
                     {/* MOBILE SOCIAL ICONS */}
@@ -229,6 +230,7 @@ export default function Navbar() {
                           <a
                             href={social.href}
                             target="_blank"
+                            rel="noopener noreferrer"
                             onClick={handleMobileLinkClick}
                           >
                             {social.icon}
@@ -236,10 +238,12 @@ export default function Navbar() {
                         </Button>
                       ))}
                     </div>
+
                   </div>
                 </SheetContent>
               </Sheet>
             </div>
+
           </div>
         </div>
       </div>
