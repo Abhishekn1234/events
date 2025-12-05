@@ -4,6 +4,7 @@ import AboutUs from "@/components/Home/About";
 import ServicesSection from "@/components/Home/Services";
 import WhyChoose from "@/components/Home/WhyChoose";
 import ReachUs from "@/components/Home/ReachUs";
+import ScrollHighlight from "@/components/Home/Servdk";
 
 export default function Home() {
   const handlePlanClick = () => {
@@ -17,6 +18,7 @@ export default function Home() {
 
       <ScrollReveal><AboutUs /></ScrollReveal>
       <ScrollReveal delay={0.2}><ServicesSection /></ScrollReveal>
+      <ScrollReveal delay={0.2}><ScrollHighlight/></ScrollReveal>
       <ScrollReveal delay={0.4}><WhyChoose /></ScrollReveal>
       <ScrollReveal delay={0.6}><ReachUs /></ScrollReveal>
     </div>

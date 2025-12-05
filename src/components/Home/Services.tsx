@@ -1,99 +1,82 @@
-import { FC } from "react";
-import { Button } from "@/components/ui/button";
+import { FC, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+const texts = ["Hush Technologies", "Luxury", "Celebration"];
 
 const services = [
-  {
-    title: "Event Management",
-    img: "/images/event-management.jpg",
-  },
-  {
-    title: "Venue Selection",
-    img: "/images/venue-selection.jpg",
-  },
-  {
-    title: "Wedding Planning",
-    img: "/images/wedding-planning.jpg",
-  },
-  {
-    title: "Birthday Party",
-    img: "/images/birthday-party.jpg",
-  },
-  {
-    title: "Corporate Events",
-    img: "/images/corporate-events.jpg",
-  },
-];
-
-const works = [
-  "/images/work1.jpg",
-  "/images/work2.jpg",
-  "/images/work3.jpg",
-  "/images/work4.jpg",
-  "/images/work5.jpg",
+  { img: "/hero.jpg", title: "Wedding Planning" },
+  { img: "/hero.jpg", title: "Corporate Events" },
+  { img: "/hero.jpg", title: "Private Parties" },
+  { img: "/hero.jpg", title: "Photography" },
 ];
 
 const ServicesSection: FC = () => {
-  const handleReadMore = () => {
-    window.location.href = "/events"; // 👈 Redirect to /events
+  const [scrollDir, setScrollDir] = useState<"normal" | "reverse">("normal");
+
+  useEffect(() => {
+    let lastScrollY = window.pageYOffset;
+    const updateScrollDir = () => {
+      const scrollY = window.pageYOffset;
+      if (scrollY > lastScrollY) setScrollDir("normal");
+      else if (scrollY < lastScrollY) setScrollDir("reverse");
+      lastScrollY = scrollY;
+    };
+    window.addEventListener("scroll", updateScrollDir);
+    return () => window.removeEventListener("scroll", updateScrollDir);
+  }, []);
+
+  const getXPositions = () => {
+    if (scrollDir === "normal") {
+      return { initial: "0%", animate: "-30%" };
+    } else {
+      return { initial: "-100%", animate: "0%" };
+    }
   };
 
+  const { initial, animate } = getXPositions();
+
   return (
-    <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">OUR SERVICES</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Exceptional events require extraordinary planning. Our services are tailored
-            to meet your vision with elegance and professionalism.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-16">
-          {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="relative group bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+    <section className="bg-black py-20 overflow-x-hidden text-white w-full">
+      <motion.div
+        className="flex gap-6 w-max" // w-max allows items to keep their natural width
+        initial={{ x: initial }}
+        animate={{ x: animate }}
+        transition={{
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 25,
+          ease: "linear",
+        }}
+      >
+        {/* Text column */}
+        <div className="flex flex-col gap-10">
+          {texts.map((text, idx) => (
+            <span
+              key={`text-${idx}`}
+              className="text-3xl md:text-5xl font-bold text-gradient bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF)",
+              }}
             >
-              <img
-                src={service.img}
-                alt={service.title}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
-
-                {/* Only for Event Management */}
-                {idx === 0 && (
-                  <Button
-                    variant="default"
-                    className="bg-white text-gray-900 hover:bg-gray-200"
-                    onClick={handleReadMore} // 👈 Added redirect
-                  >
-                    READ MORE
-                  </Button>
-                )}
-              </div>
-            </div>
+              {text}
+            </span>
           ))}
         </div>
 
-        {/* Some of Our Works */}
-        <div className="mb-8">
-          <h3 className="text-3xl font-bold mb-6 text-center">SOME OF OUR WORKS</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-            {works.map((work, idx) => (
-              <img
-                key={idx}
-                src={work}
-                alt={`Work ${idx + 1}`}
-                className="w-full h-48 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
-              />
-            ))}
+        {/* Images column */}
+        {services.map((service, idx) => (
+          <div
+            key={`img-${idx}`}
+            className="w-80 md:w-[500px] h-60 md:h-[300px] flex-shrink-0 rounded-xl bg-cover bg-center relative"
+            style={{ backgroundImage: `url(${service.img})` }}
+          >
+            <h3 className="absolute inset-0 flex items-center justify-center text-2xl md:text-4xl font-bold text-white bg-black/30">
+              {service.title}
+            </h3>
           </div>
-        </div>
-      </div>
+        ))}
+      </motion.div>
     </section>
   );
 };
