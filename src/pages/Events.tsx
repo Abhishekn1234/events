@@ -8,7 +8,7 @@ const eventData = [
         date: "6TH SEP",
         time: "6:00 PM",
         location: "ALOFT AL MINA, BURDUBAI, UAE",
-        image: "/hero.jpg",
+        image: "/events (1).jpg",
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const eventData = [
         date: "SEP 07",
         time: "6:00 PM",
         location: "ALOFT AL MINA, BURDUBAI, UAE",
-        image: "/hero.jpg",
+         image: "/events (2).jpg",
     },
     {
         id: 3,
@@ -26,7 +26,7 @@ const eventData = [
         date: "Must Know: Gate open @ 11 AM",
         time: "LUNCH: Sadhya (20 items)",
         location: "ALOFT AL MINA, BURDUBAI, UAE",
-        image: "/hero.jpg",
+         image: "/events (3).jpg",
     },
 ];
 
