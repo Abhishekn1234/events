@@ -62,7 +62,7 @@ const AboutUs: FC = () => {
         {/* Optional Image / Illustration */}
         <div className="flex-1 hidden md:flex items-center justify-center">
           <img
-            src="/event-about.jpg"
+            src="/Event Management.jpg"
             alt="Event Management"
             className="rounded-2xl shadow-2xl object-cover w-full h-full max-h-[400px]"
           />

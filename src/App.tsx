@@ -10,6 +10,9 @@ import Snowfall from "react-snowfall";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Services from "./pages/Services";
+import WeddingPlanning from "./pages/WeddingPlanning";
+import Cooperate from "./pages/Cooperate";
+import Private from "./pages/Private";
 
 function App() {
   return (
@@ -34,6 +37,10 @@ function App() {
         <Route path="/about" element={<About/>} />
          <Route path="/gallery" element={<Gallery/>} />
          <Route path="/services" element={<Services/>} />
+          <Route path="/services/wedding-planning" element={<WeddingPlanning/>} />
+           <Route path="/services/corporate-events" element={<Cooperate/>} />
+            <Route path="/services/private-parties" element={<Private/>} />
+
       </Routes>
 
       <Footer />

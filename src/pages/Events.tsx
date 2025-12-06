@@ -170,6 +170,12 @@ const inlineStyles = `
 `;
 
 export default function Events() {
+    useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}, []); 
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [countdown, setCountdown] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
 

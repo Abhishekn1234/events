@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import DripSection from "./Drip";
+import { useEffect } from "react";
 
 export default function Services() {
+  useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}, []); 
   return (
     <div className="w-full py-24 bg-black text-white">
       

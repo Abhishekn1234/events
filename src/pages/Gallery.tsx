@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import DripSection from "./Drip";
 import useInView from "./useInhooks";
 
@@ -8,9 +9,15 @@ export default function Gallery() {
   const [ref1, visible1] = useInView({ threshold: 0.3 });
   const [ref2, visible2] = useInView({ threshold: 0.3 });
   const [ref3, visible3] = useInView({ threshold: 0.3 });
-
+useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}, []); 
   return (
     <>
+    
       <div className="w-full">
 
         {/* SECTION 1 */}

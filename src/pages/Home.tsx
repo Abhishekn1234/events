@@ -5,13 +5,19 @@ import ServicesSection from "@/components/Home/Services";
 import WhyChoose from "@/components/Home/WhyChoose";
 import ReachUs from "@/components/Home/ReachUs";
 import ScrollHighlight from "@/components/Home/Servdk";
+import { useEffect } from "react";
 
 export default function Home() {
   const handlePlanClick = () => {
     const reachUs = document.getElementById("reach-us");
     if (reachUs) reachUs.scrollIntoView({ behavior: "smooth" });
   };
-
+useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}, []); 
   return (
     <div className="relative bg-black text-white min-h-screen overflow-hidden">
       <HeroSection onPlanClick={handlePlanClick} />
