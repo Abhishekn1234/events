@@ -48,8 +48,8 @@ useEffect(() => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl w-full">
             {[
-              "/g1.jpg", "/g2.jpg", "/g3.jpg", "/g4.jpg",
-              "/g5.jpg", "/g6.jpg", "/g7.jpg", "/g8.jpg"
+              "/Events.jpg", "/download (1).jpg", "/download (2).jpg", "/Red and Gold Themed Decor.jpg",
+              "/Connecting, collaborating, and cultivating new opportunities.jpg", "/Corporate Event Setup _ Grand Ballroom Inspiration.jpg", "/Multi-Function Room  Kempinski Hotel Yixing    Designed by HBA.jpg", "/Gallery.jpg"
             ].map((src, index) => (
               <div
                 key={index}

@@ -13,6 +13,7 @@ import Services from "./pages/Services";
 import WeddingPlanning from "./pages/WeddingPlanning";
 import Cooperate from "./pages/Cooperate";
 import Private from "./pages/Private";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/about" element={<About/>} />
          <Route path="/gallery" element={<Gallery/>} />
          <Route path="/services" element={<Services/>} />
+          <Route path="/contact" element={<Contact/>} />
           <Route path="/services/wedding-planning" element={<WeddingPlanning/>} />
            <Route path="/services/corporate-events" element={<Cooperate/>} />
             <Route path="/services/private-parties" element={<Private/>} />

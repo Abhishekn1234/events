@@ -41,7 +41,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
-              src="https://images.unsplash.com/photo-1529636122828-5e4c8e7ef72c"
+              src="/gallery1.jpg"
               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
               alt="Wedding"
             />
@@ -114,7 +114,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
-              src="https://images.unsplash.com/photo-1551739440-5dd934d3a94e"
+              src="/pe.jpg"
               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
               alt="Private Events"
             />
@@ -180,7 +180,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6">
             <img
-              src="/your-image.jpg"
+              src="/cop.jpg"
               alt="Corporate Events"
               className="w-full h-full object-cover"
             />
@@ -267,6 +267,7 @@ export default function Services() {
         </motion.div>
 
       </div>
+      <br/>
 
       <DripSection />
     </div>

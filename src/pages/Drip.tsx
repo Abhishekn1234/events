@@ -1,6 +1,6 @@
 export default function DripSection() {
   return (
-    <section className="relative w-full bg-black overflow-hidden mt-20">
+    <section className="relative w-full bg-black overflow-hidden mt-0">
 
       {/* Dripping Top Wave */}
       <div className="w-full overflow-hidden leading-none">
@@ -18,10 +18,21 @@ export default function DripSection() {
       </div>
 
       {/* Black section content */}
-     <div className="relative z-10 w-full py-20 bg-black flex justify-center items-center">
-  <h1 className="text-4xl font-bold text-white tracking-wide text-center">
-    #CELEBRATEWITHHUSHLUSH
-  </h1>
+     <div className="relative z-10 w-full py-20 bg-black">
+  <div className="container mx-auto px-6">
+    <div className="relative overflow-hidden group">
+      {/* Animated background effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d9c15e]/10 to-transparent 
+        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+      
+      <h1 className="text-4xl md:text-6xl font-light text-[#d9c15e] tracking-[0.2em] text-center">
+        #CELEBRATEWITHHUSHLUSH
+      </h1>
+      
+      {/* Subtle underline */}
+      <div className="mt-4 h-[1px] w-32 mx-auto bg-gradient-to-r from-transparent via-[#d9c15e] to-transparent" />
+    </div>
+  </div>
 </div>
 
 
