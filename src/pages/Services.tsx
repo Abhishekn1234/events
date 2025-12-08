@@ -1,23 +1,46 @@
 import { motion } from "framer-motion";
 import DripSection from "./Drip";
 import { useEffect } from "react";
+import { cubicBezier } from "framer-motion";
 
+// ---------------- SCROLL-IN VARIANT ----------------
+const scrollVariant = {
+  hidden: { opacity: 0, y: 80 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: cubicBezier(0.25, 0.1, 0.25, 1),
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: cubicBezier(0.2, 0.0, 0.2, 1),
+    },
+  },
+};
 export default function Services() {
   useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-}, []); 
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="w-full py-24 bg-black text-white">
-      
+
       {/* ---------------- PAGE HEADER ---------------- */}
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        variants={scrollVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
         className="text-center max-w-3xl mx-auto px-6"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-2">Services</h1>
@@ -31,13 +54,16 @@ export default function Services() {
       {/* ---------------- SERVICE GRID ---------------- */}
       <div className="mt-20 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6">
 
-        {/* ---------------- WEDDINGS CARD ---------------- */}
+        {/* ----------------------------------------------------
+            WEDDINGS CARD
+        ---------------------------------------------------- */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-white/5 rounded-2xl p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group"
+          variants={scrollVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="bg-white/5 rounded-2xl p-6 shadow-xl border border-transparent
+                     hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 group"
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
@@ -48,12 +74,12 @@ export default function Services() {
           </div>
 
           <h3 className="text-3xl font-semibold mb-3 text-center">Weddings</h3>
-
           <p className="text-gray-300 text-center mb-8 leading-relaxed">
             Romantic, traditional, or modern — we design weddings that tell your love story beautifully.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
             {/* Planning */}
             <div className="bg-white/10 rounded-xl p-5 shadow-lg space-y-4">
               <h4 className="text-xl font-semibold">Planning & Coordination</h4>
@@ -101,16 +127,20 @@ export default function Services() {
                 <li>Guest Management & Hospitality</li>
               </ul>
             </div>
+
           </div>
         </motion.div>
 
-        {/* ---------------- PRIVATE EVENTS CARD ---------------- */}
+        {/* ----------------------------------------------------
+            PRIVATE EVENTS CARD
+        ---------------------------------------------------- */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-white/5 rounded-2xl p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group"
+          variants={scrollVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="bg-white/5 rounded-2xl p-6 shadow-xl border border-transparent 
+                     hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 group"
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
@@ -121,10 +151,8 @@ export default function Services() {
           </div>
 
           <h3 className="text-3xl font-semibold mb-3 text-center">Private Events</h3>
-
           <p className="text-gray-300 text-center mb-8 leading-relaxed">
-            From intimate celebrations to grand parties, we create unforgettable experiences 
-            tailored to your style and occasion.
+            From intimate celebrations to grand parties, we create unforgettable experiences tailored to your style and occasion.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -159,24 +187,30 @@ export default function Services() {
             ].map((section, i) => (
               <div
                 key={i}
-                className="bg-white/10 rounded-xl p-5 shadow-lg space-y-4 transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl"
+                className="bg-white/10 rounded-xl p-5 shadow-lg space-y-4 
+                           transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl"
               >
                 <h4 className="text-xl font-semibold">{section.title}</h4>
                 <ul className="text-gray-300 space-y-1 list-disc list-inside">
-                  {section.items.map((it, idx) => <li key={idx}>{it}</li>)}
+                  {section.items.map((it, idx) => (
+                    <li key={idx}>{it}</li>
+                  ))}
                 </ul>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* ---------------- CORPORATE EVENTS CARD ---------------- */}
+        {/* ----------------------------------------------------
+            CORPORATE EVENTS CARD
+        ---------------------------------------------------- */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-white/5 rounded-2xl p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group"
+          variants={scrollVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="bg-white/5 rounded-2xl p-6 shadow-xl border border-transparent 
+                     hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 group"
         >
           <div className="w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6">
             <img
@@ -211,28 +245,34 @@ export default function Services() {
               {
                 title: "Brand & Marketing",
                 items: ["Brand Activations", "Pop-up Events", "Press Conferences & Media Events"]
-              }
+              },
             ].map((section, i) => (
               <div
                 key={i}
-                className="bg-white/10 rounded-xl p-6 shadow-lg space-y-4 transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl"
+                className="bg-white/10 rounded-xl p-6 shadow-lg space-y-4 
+                           transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl"
               >
                 <h4 className="text-xl font-semibold">{section.title}</h4>
                 <ul className="text-gray-300 space-y-1 list-disc list-inside">
-                  {section.items.map((it, idx) => <li key={idx}>{it}</li>)}
+                  {section.items.map((it, idx) => (
+                    <li key={idx}>{it}</li>
+                  ))}
                 </ul>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* ---------------- ADDITIONAL SERVICES CARD ---------------- */}
+        {/* ----------------------------------------------------
+            ADDITIONAL SERVICES CARD
+        ---------------------------------------------------- */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-white/5 rounded-2xl p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group"
+          variants={scrollVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="bg-white/5 rounded-2xl p-6 shadow-xl border border-transparent 
+                     hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 group"
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
@@ -250,7 +290,9 @@ export default function Services() {
             Enhance your event with our optional add-ons that make every detail perfect.
           </p>
 
-          <div className="bg-white/10 rounded-xl p-6 shadow-lg space-y-4 transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl">
+          <div className="bg-white/10 rounded-xl p-6 shadow-lg space-y-4 
+                          transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-2xl"
+          >
             <h4 className="text-xl font-semibold text-white">Extras</h4>
             <ul className="text-gray-300 space-y-2 list-disc list-inside">
               <li>Venue Selection & Booking</li>
@@ -267,11 +309,10 @@ export default function Services() {
         </motion.div>
 
       </div>
-      <br/>
 
+      <br />
       <DripSection />
+
     </div>
   );
 }
-
-

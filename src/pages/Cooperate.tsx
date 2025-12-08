@@ -213,11 +213,12 @@ const fadeUp: Variants = {
         </p>
 
         <a
-          href="#contact"
-          className="px-8 py-3 bg-orange-500 text-black font-semibold rounded-xl shadow-lg hover:bg-orange-600 transition-all"
+          href="/contact"
+          className="px-8 py-3  bg-orange-500 text-black font-semibold rounded-xl shadow-lg hover:bg-orange-600 transition-all"
         >
           Get in Touch
         </a>
+        <br/><br/><br/>
         <DripSection/>
       </motion.section>
     </>
@@ -255,6 +256,7 @@ function ScrollSection({
         })}
       </div>
     </section>
+    
   );
 }
 

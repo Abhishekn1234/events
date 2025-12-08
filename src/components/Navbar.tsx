@@ -76,36 +76,51 @@ export default function Navbar() {
               ))}
 
               {/* SERVICES DROPDOWN — DESKTOP */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="text-white text-base font-medium hover:text-primary transition-all hover:scale-105">
-                    Services
-                  </button>
-                </DropdownMenuTrigger>
+              {/* SERVICES DROPDOWN — DESKTOP */}
+<DropdownMenu>
+  <div className="flex items-center space-x-2">
 
-                <DropdownMenuContent className="bg-black text-white border border-white/20 w-56">
-                  <DropdownMenuItem
-                    onClick={() => navigation("/services/wedding-planning")}
-                    className="hover:bg-white/10 cursor-pointer"
-                  >
-                    Wedding Planning
-                  </DropdownMenuItem>
+    {/* CLICK to go to /services */}
+    <button
+      onClick={() => navigation("/services")}
+      className="text-white text-base font-medium hover:text-primary transition-all hover:scale-105"
+    >
+      Services
+    </button>
 
-                  <DropdownMenuItem
-                    onClick={() => navigation("/services/corporate-events")}
-                    className="hover:bg-white/10 cursor-pointer"
-                  >
-                    Corporate Events
-                  </DropdownMenuItem>
+    {/* DROPDOWN ARROW — opens menu */}
+    <DropdownMenuTrigger asChild>
+      <button className="text-white hover:text-primary transition-all">
+        ▼
+      </button>
+    </DropdownMenuTrigger>
+  </div>
 
-                  <DropdownMenuItem
-                    onClick={() => navigation("/services/private-parties")}
-                    className="hover:bg-white/10 cursor-pointer"
-                  >
-                    Private Parties
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+  {/* DROPDOWN MENU */}
+  <DropdownMenuContent className="bg-black text-white border border-white/20 w-56">
+    <DropdownMenuItem
+      onClick={() => navigation("/services/wedding-planning")}
+      className="hover:bg-white/10 cursor-pointer"
+    >
+      Wedding Planning
+    </DropdownMenuItem>
+
+    <DropdownMenuItem
+      onClick={() => navigation("/services/corporate-events")}
+      className="hover:bg-white/10 cursor-pointer"
+    >
+      Corporate Events
+    </DropdownMenuItem>
+
+    <DropdownMenuItem
+      onClick={() => navigation("/services/private-parties")}
+      className="hover:bg-white/10 cursor-pointer"
+    >
+      Private Parties
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+
             </div>
           </div>
 
