@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DripSection from "./Drip";
 
 export default function Contact() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []); 
   return (
     <>
     <section className="w-full bg-black text-white py-20 px-6">
