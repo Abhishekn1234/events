@@ -67,7 +67,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
-              src="/gallery1.jpg"
+              src="/157c4193953156c29c314cc87f694946 (1).jpg"
               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
               alt="Wedding"
             />
@@ -144,7 +144,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden mb-6">
             <img
-              src="/pe.jpg"
+              src="/68439ece091407b13f240b822af574cf.jpg"
               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
               alt="Private Events"
             />
@@ -214,7 +214,7 @@ export default function Services() {
         >
           <div className="w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6">
             <img
-              src="/cop.jpg"
+              src="/a0fd3abb31d8d1126603b3a4940a1a3c.jpg"
               alt="Corporate Events"
               className="w-full h-full object-cover"
             />

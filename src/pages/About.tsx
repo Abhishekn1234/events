@@ -48,7 +48,7 @@ export default function About() {
           viewport={{ once: true }}
         >
           <img
-            src="/Picture1.jpg"
+            src="/ad3e8d2a11f915590699269404fad454.jpg"
             alt="Hush Lush Events"
             className="w-full max-w-xl rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
           />
@@ -137,6 +137,8 @@ export default function About() {
             </p>
           </div>
         </motion.div>
+        <br/>
+        <br/><br/>
         <DripSection/>
       </section>
     </>

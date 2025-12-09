@@ -1,5 +1,5 @@
 import { FC, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Snowfall from "react-snowfall";
 
 interface HeroSectionProps {
@@ -12,16 +12,10 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
   // Track global scroll
   const { scrollY } = useScroll();
 
-  // Hero height = fade point
-  const fadeStart = 0;                     // when on top
-  const fadeEnd = typeof window !== "undefined"
-    ? window.innerHeight * 0.9            // fade only after leaving hero
-    : 800;
+  const fadeStart = 0;
+  const fadeEnd = typeof window !== "undefined" ? window.innerHeight * 0.9 : 800;
 
-  // Fade image ONLY after crossing hero height
   const opacity = useTransform(scrollY, [fadeStart, fadeEnd], [1, 0]);
-
-  // Keep image fully zoomed only in hero, shrink when scrolled past hero
   const scale = useTransform(scrollY, [fadeStart, fadeEnd], [1.2, 0.9]);
 
   return (
@@ -29,10 +23,15 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
       ref={sectionRef}
       className="relative bg-black min-h-screen overflow-hidden flex items-center justify-center"
     >
-      {/* Background image stays until hero ends */}
-      <motion.div
+      {/* ❌ Replace background image with video */}
+      <motion.video
         style={{ opacity, scale }}
-        className="absolute inset-0 bg-[url('/hero.jpg')] bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/copy_75A3E4C5-A050-40FE-9DF2-C01C468BA720.mov"
+        autoPlay
+        loop
+        muted
+        playsInline
       />
 
       {/* ❄️ Snow */}
@@ -68,3 +67,4 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
 };
 
 export default HeroSection;
+

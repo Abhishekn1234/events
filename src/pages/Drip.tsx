@@ -5,7 +5,7 @@ export default function DripSection() {
       {/* Dripping Top Wave */}
       <div className="w-full overflow-hidden leading-none">
         <svg
-          className="w-full h-40 md:h-56 lg:h-64 block"
+          className="w-full h-32 sm:h-40 md:h-56 lg:h-64 block"
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -17,25 +17,27 @@ export default function DripSection() {
         </svg>
       </div>
 
-      {/* Black section content */}
-     <div className="relative z-10 w-full py-20 bg-black">
-  <div className="container mx-auto px-6">
-    <div className="relative overflow-hidden group">
-      {/* Animated background effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d9c15e]/10 to-transparent 
-        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-      
-      <h1 className="text-4xl md:text-6xl font-light text-[#d9c15e] tracking-[0.2em] text-center">
-        #CELEBRATEWITHHUSHLUSH
-      </h1>
-      
-      {/* Subtle underline */}
-      <div className="mt-4 h-[1px] w-32 mx-auto bg-gradient-to-r from-transparent via-[#d9c15e] to-transparent" />
-    </div>
-  </div>
-</div>
+      {/* Black Section Content */}
+      <div className="relative z-10 w-full py-16 sm:py-20 md:py-24 bg-black">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden group">
 
+            {/* Animated background effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d9c15e]/10 to-transparent 
+              -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
+            {/* Main Hashtag Text */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#d9c15e] tracking-widest text-center leading-tight">
+              #CELEBRATEWITHHUSHLUSH
+            </h1>
+
+            {/* Subtle underline */}
+            <div className="mt-4 h-[1px] w-24 sm:w-32 mx-auto bg-gradient-to-r from-transparent via-[#d9c15e] to-transparent" />
+          </div>
+        </div>
+      </div>
 
     </section>
   );
 }
+

@@ -92,7 +92,7 @@ interface ScrollRevealProps {
         <motion.div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/weddingsdjd.jpg')",
+            backgroundImage: "url('/157c4193953156c29c314cc87f694946 (1).jpg')",
             opacity: opacity,
             boxShadow: shadowValue,
           }}
@@ -135,8 +135,8 @@ interface ScrollRevealProps {
               </div>
               <div className="w-full">
                 <img
-                  src="/Spotlight Events - Vancouver Wedding and Events Planning Team.jpg"
-                  className="w-full rounded-2xl shadow-xl object-cover"
+                  src="/a0fd3abb31d8d1126603b3a4940a1a3c.jpg"
+                  className="w-full rounded-2xl shadow-xl object-cover md:h-70"
                   alt="Wedding Planning"
                 />
               </div>
@@ -257,13 +257,14 @@ interface ScrollRevealProps {
             direction={scrollDirection === 'down' ? 'up' : 'down'}
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="w-full">
-                <img
-                  src="/BEST PRE WEDDING POSES IN JAIPUR.jpg"
-                  alt="Pre Wedding Events"
-                  className="w-full rounded-2xl shadow-xl object-cover h-96"
-                />
-              </div>
+          <div className="w-full">
+  <img
+    src="/5d9b09979a6c130497964b9d3c78b698.jpg"
+    alt="Pre Wedding Events"
+    className="w-full rounded-2xl shadow-xl object-cover h-72 md:h-80"
+  />
+</div>
+
               <div className="space-y-6">
                 <h2 className="text-4xl md:text-5xl font-extrabold text-orange-500">
                   Pre-Wedding Events

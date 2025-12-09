@@ -103,7 +103,7 @@ export default function Private() {
         "Holiday & Themed Parties",
         "Cultural & Religious Celebrations",
       ],
-      img: "/istockphoto-1353994257-612x612.jpg",
+      img: "/8e8c090b023114191e642071528acb33.jpg",
     },
     {
       title: "Luxury & Lifestyle Events",
@@ -114,7 +114,7 @@ export default function Private() {
         "House/Villa & Rooftop Parties",
         "Garden & Poolside Events",
       ],
-      img: "/aksj.jpg",
+      img: "/68439ece091407b13f240b822af574cf.jpg",
     },
     {
       title: "Full-Scale Production",
@@ -125,7 +125,7 @@ export default function Private() {
         "Custom Photo Booths & Props",
         "Interactive Entertainment & MCs",
       ],
-      img: "/full.jpg",
+      img: "/68439ece091407b13f240b822af574cf.jpg",
     },
   ];
 
@@ -153,14 +153,14 @@ useEffect(() => {
   });
 }, []);
   const highlights: HighlightItem[] = [
-    { id: 1, img: "/downlosh.jpg" },
-    { id: 2, img: "/images.jpg" },
-    { id: 3, img: "/highlights.jpg" },
-    { id: 4, img: "/ariets.jpg" },
-    { id: 5, img: "/weddingsevents.jpg" },
-    { id: 6, img: "/imageshdh.jpg" },
-    { id: 7, img: "/evenysdk.jpg" },
-    { id: 8, img: "/unsplansd.jpg" },
+    { id: 1, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 2, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 3, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 4, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 5, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 6, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 7, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 8, img: "/68439ece091407b13f240b822af574cf.jpg" },
   ];
 
   return (
@@ -169,7 +169,7 @@ useEffect(() => {
       <section 
         className="relative w-full min-h-screen bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: "url('/df.jpg')",
+          backgroundImage: "url('/68439ece091407b13f240b822af574cf.jpg')",
           backgroundAttachment: "fixed"
         }}
       >

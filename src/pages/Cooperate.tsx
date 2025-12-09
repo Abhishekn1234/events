@@ -55,7 +55,7 @@ const fadeUp: Variants = {
       {/* ---------------- HERO SECTION ---------------- */}
       <section
         className="w-full h-screen bg-center bg-cover bg-fixed relative flex items-center justify-center"
-        style={{ backgroundImage: "url('/Corporate Events Services.jpg')" }}
+        style={{ backgroundImage: "url('/c8029469e9368eecc50796d840d596ec.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
 
@@ -120,7 +120,7 @@ const fadeUp: Variants = {
       <ScrollSection reverse>
         <motion.div variants={fadeLeft}>
           <img
-            src="/The Five Dysfunctions Of A Team Book Review.jpg"
+            src="/0a9099c7ba2dba3286d62be157662ec5.jpg"
             className="rounded-2xl shadow-xl w-full object-cover h-70"
           />
         </motion.div>
