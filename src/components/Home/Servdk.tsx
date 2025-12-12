@@ -11,6 +11,12 @@ import Events from "./Events";
 // --------------------------------------------------------
 // ANGLED BLOCK COMPONENT
 // --------------------------------------------------------
+// --------------------------------------------------------
+// ANGLED BLOCK COMPONENT (UPDATED STYLES)
+// --------------------------------------------------------
+// --------------------------------------------------------
+// ANGLED BLOCK COMPONENT (UPDATED TO MATCH SCREENSHOT)
+// --------------------------------------------------------
 interface AngledBlockProps {
   text: string;
   color: string;
@@ -31,38 +37,46 @@ const AngledBlock: React.FC<AngledBlockProps> = ({
     offset: ["start end", "end start"],
   });
 
+  // Scroll-based animations
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.08, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.4]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]); // fade in/out
   const rotate = useTransform(
     scrollYProgress,
     [0, 1],
     [`${rotateBase - 4}deg`, `${rotateBase + 4}deg`]
   );
 
+  const textColor = "text-white";
+  const textShadowClass = "drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)]";
+
   return (
     <motion.div
       ref={ref}
       style={{ scale, opacity, rotate }}
-      className="
-        w-[88vw] max-w-[680px] h-[110px]
-        flex items-center justify-center
-        shadow-[0px_15px_25px_rgba(0,0,0,0.4)]
-        rounded-[6px]
-        absolute
-      "
+      className="w-[88vw] max-w-[680px] h-[110px] flex items-center justify-center absolute"
       initial={{ y: index * 90 }}
     >
       <div
         style={{ backgroundColor: color }}
         className="w-full h-full flex items-center justify-center rounded-[6px]"
       >
-        <div className="text-white text-[48px] uppercase tracking-[6px] font-light">
+        <div
+          className={`
+            ${textColor} 
+            text-[50px] uppercase
+            tracking-[4px] font-black
+            ${textShadowClass} 
+            leading-tight
+            whitespace-nowrap
+          `}
+        >
           {text}
         </div>
       </div>
     </motion.div>
   );
 };
+
 
 // --------------------------------------------------------
 // VIDEO PLACEHOLDER

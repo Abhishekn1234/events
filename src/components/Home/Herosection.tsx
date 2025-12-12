@@ -1,6 +1,7 @@
+
 import { FC, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Snowfall from "react-snowfall";
+
 
 interface HeroSectionProps {
   onPlanClick: () => void;
@@ -35,15 +36,7 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
       />
 
       {/* ❄️ Snow */}
-      <Snowfall
-        color="white"
-        snowflakeCount={120}
-        radius={[1, 3]}
-        speed={[0.5, 2]}
-        wind={[-1, 1]}
-        style={{ position: "absolute", inset: 0, zIndex: 5 }}
-      />
-
+      
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl px-4 space-y-8">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-lg leading-tight">

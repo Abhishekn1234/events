@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Events from "./pages/Events";
 
 // import snowfall
-import Snowfall from "react-snowfall";
+// import Snowfall from "react-snowfall";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Services from "./pages/Services";
@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       {/* Global Snowfall Effect */}
-      <Snowfall 
+      {/* <Snowfall 
         snowflakeCount={120}
         style={{
           position: "fixed",
@@ -28,7 +28,7 @@ function App() {
           zIndex: 9999, 
           pointerEvents: "none", // important: allows clicking through
         }}
-      />
+      /> */}
 
       <Navbar />
 

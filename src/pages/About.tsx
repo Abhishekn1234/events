@@ -1,3 +1,4 @@
+
 "use client";
 import { motion } from "framer-motion";
 import DripSection from "./Drip";
@@ -144,5 +145,6 @@ export default function About() {
     </>
   );
 }
+
 
 

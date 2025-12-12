@@ -1,3 +1,13 @@
+
+
+/* ------------------------------------------- */
+/*  REUSABLE SCROLL SECTION COMPONENT          */
+/* ------------------------------------------- */
+
+
+
+
+
 "use client";
 
 import React ,{ ReactElement, useEffect } from "react";
