@@ -44,7 +44,7 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
         </h1>
 
         <p className="text-gray-300 text-lg lg:text-xl">
-          Welcome to <span className="text-cyan-400 font-semibold">HushLash</span>, 
+          Welcome to <span className="text-cyan-400 font-semibold">Aalizah Events</span>, 
           where every event becomes an unforgettable experience.
         </p>
 
