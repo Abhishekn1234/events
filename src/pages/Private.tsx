@@ -153,7 +153,7 @@ useEffect(() => {
   });
 }, []);
   const highlights: HighlightItem[] = [
-    { id: 1, img: "/event highlights 4.jpg" },
+     { id: 1, img: "/event highlights 4.jpg" },
     { id: 2, img: "/luxury & lifestyle.jpg" },
     { id: 3, img: "/luxury & lifestyle1.jpg" },
     { id: 4, img: "/wedpic3.jpg" },
