@@ -125,7 +125,7 @@ export default function Private() {
         "Custom Photo Booths & Props",
         "Interactive Entertainment & MCs",
       ],
-      img: "/68439ece091407b13f240b822af574cf.jpg",
+      img: "/full scale producation.jpg.jpg",
     },
   ];
 
