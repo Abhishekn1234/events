@@ -58,7 +58,7 @@ export default function Navbar() {
               onClick={() => navigation("/")}
             >
               <h1 className="text-3xl font-extrabold text-white hover:text-primary transition-all">
-                HushLash
+                Aalizah Events
               </h1>
             </div>
 
