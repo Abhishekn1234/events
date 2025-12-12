@@ -207,7 +207,7 @@ const ServicesSection: FC = () => {
     },
     {
       type: "singleImage",
-      image: { src: "/a0fd3abb31d8d1126603b3a4940a1a3c.jpg", title: "Photography" },
+      image: { src: "/ss.jpg", title: "Photography" },
     },
   ];
 

@@ -73,33 +73,51 @@ const CelebrateLove: FC = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="text-center max-w-5xl space-y-14 relative z-10">
+   <div className="text-center max-w-5xl space-y-14 relative z-10">
 
-        <AnimatedLine className="text-6xl md:text-8xl font-light" delay={0}>
-          CELEBRATE
-        </AnimatedLine>
+  <AnimatedLine
+    className="text-6xl md:text-8xl font-light uppercase leading-tight"
+    delay={0}
+  >
+    Celebrate togetherness with moments  
+    that become forever stories
+  </AnimatedLine>
 
-        <AnimatedLine className="text-5xl md:text-7xl font-light" delay={0.15}>
-          LOVE, JOY, AND
-        </AnimatedLine>
+  <AnimatedLine
+    className="text-5xl md:text-7xl font-light uppercase leading-tight"
+    delay={0.15}
+  >
+    Love, joy
+  </AnimatedLine>
 
-        {/* FOREVER CARD */}
-        <AnimatedForever />
+  {/* FOREVER CARD */}
+  <AnimatedForever />
 
-        <AnimatedLine className="text-5xl md:text-7xl font-light block" delay={0.45}>
-          WITH
-        </AnimatedLine>
+  <AnimatedLine
+    className="text-5xl md:text-7xl font-light uppercase leading-tight"
+    delay={0.45}
+  >
+    and memories
+  </AnimatedLine>
 
-        <AnimatedLine className="text-6xl md:text-8xl font-light" delay={0.6}>
-          UNFORGETTABLE
-        </AnimatedLine>
+  <AnimatedLine
+    className="text-6xl md:text-8xl font-light uppercase leading-tight"
+    delay={0.6}
+  >
+    captured beautifully
+  </AnimatedLine>
 
-        <AnimatedLine className="text-6xl md:text-8xl font-light" delay={0.75}>
-          MOMENTS
-        </AnimatedLine>
+  <AnimatedLine
+    className="text-6xl md:text-8xl font-light uppercase leading-tight"
+    delay={0.75}
+  >
+    for a lifetime.
+  </AnimatedLine>
 
-        <AnimatedParagraph />
-      </div>
+  <AnimatedParagraph />
+
+</div>
+
     </section>
   );
 };
