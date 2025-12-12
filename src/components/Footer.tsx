@@ -52,7 +52,7 @@ export default function Footer() {
           {/* Description */}
           <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
             Get exclusive updates on our latest events, special offers, and
-            behind-the-scenes stories from <span className="text-[#8cffd5]">Hush Lush</span>.
+            behind-the-scenes stories from <span className="text-[#8cffd5]">Aalizah Events</span>.
           </p>
 
           {/* Email Input Line */}
@@ -91,7 +91,7 @@ export default function Footer() {
         </div>
 
         <div>
-          Copyright © {new Date().getFullYear()} Hush Lush – All Rights Reserved
+          Copyright © {new Date().getFullYear()} Aalizah Events – All Rights Reserved
         </div>
       </div>
 

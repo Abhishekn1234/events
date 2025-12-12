@@ -134,7 +134,7 @@ export default function DripSection() {
   tracking-[0.15em] sm:tracking-[0.18em] 
   text-center leading-tight 
   drop-shadow-[0_0_20px_rgba(217,193,94,0.25)]">
-  #CELEBRATEWITHAALIZAH
+  #CELEBRATEWITHAALIZAHEVENTS
 </h4>
 
 
@@ -145,7 +145,7 @@ export default function DripSection() {
     tracking-[0.15em] sm:tracking-[0.18em] 
     text-center leading-tight 
     px-6 sm:px-8 md:px-10">
-    #CELEBRATEWITHAALIZAH
+    #CELEBRATEWITHAALIZAHEVENTS
   </h4>
 </div>
 

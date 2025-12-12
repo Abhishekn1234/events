@@ -164,7 +164,7 @@ const ScrollHighlight: React.FC = () => {
           Experience the Difference:
         </h2>
         <h3 className="text-2xl font-semibold text-gray-300">
-          Why Choose Hush Lush
+          Why Choose Aalizah Events
         </h3>
       </div>
 
