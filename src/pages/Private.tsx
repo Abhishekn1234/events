@@ -153,14 +153,14 @@ useEffect(() => {
   });
 }, []);
   const highlights: HighlightItem[] = [
-    { id: 1, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 2, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 3, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 4, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 5, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 6, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 7, img: "/68439ece091407b13f240b822af574cf.jpg" },
-    { id: 8, img: "/68439ece091407b13f240b822af574cf.jpg" },
+    { id: 1, img: "/full scale producation.jpg" },
+    { id: 2, img: "/luxury & lifestyle.jpg" },
+    { id: 3, img: "/luxury & lifestyle1.jpg" },
+    { id: 4, img: "/wedpic3.jpg" },
+    { id: 5, img: "/wedpic4.jpg" },
+    { id: 6, img: "/wedpic7.jpg" },
+    { id: 7, img: "/wedpic8.jpg" },
+    { id: 8, img: "/wedpic12.jpg" },
   ];
 
   return (

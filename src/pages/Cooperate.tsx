@@ -79,7 +79,7 @@ export default function Corporate() {
         "Annual Dinners & Gala Nights",
         "Award Ceremonies",
       ],
-      image: "/Network Marketing Wikipedia.jpg",
+      image: "/a0fd3abb31d8d1126603b3a4940a1a3c.jpg",
     },
     {
       title: "Team Engagement",
@@ -254,7 +254,7 @@ export default function Corporate() {
 
       {/* ---------------- VIDEO SECTION ---------------- */}
       <motion.section
-        className="w-full py-20 md:py-24 bg-gradient-to-b from-black to-gray-900 text-white text-center px-4 md:px-6"
+        className="w-full py-12 md:py-16 bg-gradient-to-b from-black to-gray-900 text-white text-center px-4 md:px-6"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}

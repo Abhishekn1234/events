@@ -128,16 +128,26 @@ export default function DripSection() {
             <div className="absolute inset-0 bg-radial-gradient(at center center, #d9c15e/5, transparent 70%)" />
 
             {/* Text */}
-            <h1 className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light bg-gradient-to-r from-[#d9c15e] via-[#e8d16a] to-[#d9c15e] bg-clip-text text-transparent tracking-[0.2em] sm:tracking-[0.25em] text-center leading-tight drop-shadow-[0_0_30px_rgba(217,193,94,0.3)]">
-              #CELEBRATEWITHHUSHLUSH
-            </h1>
+            <h4 className="relative text-xl sm:text-3xl md:text-4xl lg:text-5xl font-light 
+  bg-gradient-to-r from-[#d9c15e] via-[#e8d16a] to-[#d9c15e] 
+  bg-clip-text text-transparent 
+  tracking-[0.15em] sm:tracking-[0.18em] 
+  text-center leading-tight 
+  drop-shadow-[0_0_20px_rgba(217,193,94,0.25)]">
+  #CELEBRATEWITHAALIZAH
+</h4>
+
 
             {/* Shadow Text */}
-            <div className="absolute inset-0 -z-10">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-black/40 blur-sm tracking-[0.2em] sm:tracking-[0.25em] text-center leading-tight px-8 sm:px-10 md:px-12">
-                #CELEBRATEWITHHUSHLUSH
-              </h1>
-            </div>
+           <div className="absolute inset-0 -z-10">
+  <h4 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-light 
+    text-black/30 blur-sm 
+    tracking-[0.15em] sm:tracking-[0.18em] 
+    text-center leading-tight 
+    px-6 sm:px-8 md:px-10">
+    #CELEBRATEWITHAALIZAH
+  </h4>
+</div>
 
             {/* Underline */}
             <motion.div

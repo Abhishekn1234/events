@@ -193,7 +193,7 @@ const ServicesSection: FC = () => {
   const slides = [
     {
       type: "card",
-      title: "HUSH LUSH",
+      title: "AALIZAH",
       subtitle: "LUXURY",
       description: "CELEBRATIONS",
       image: { src: "/4ed87292688611ad8471655d7e029e78.jpg", title: "Wedding Planning" },

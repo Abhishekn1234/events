@@ -96,9 +96,14 @@ export default function Footer() {
       </div>
 
       {/* Scroll to top button */}
-      <button className="fixed bottom-10 right-10 w-14 h-14 bg-[#D4AF37] text-black rounded-full flex items-center justify-center text-3xl hover:scale-110 transition">
-        ↑
-      </button>
+      {/* Scroll to top button */}
+<button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="fixed bottom-10 right-10 w-14 h-14 bg-[#D4AF37] text-black rounded-full flex items-center justify-center text-3xl hover:scale-110 transition"
+>
+  ↑
+</button>
+
 
     </footer>
   );

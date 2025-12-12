@@ -47,6 +47,39 @@ const AnimatedLine = ({
   );
 };
 
+// FOREVER card animation
+const AnimatedForever = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-20% 0px -20% 0px", once: false });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{
+        opacity: inView ? 1 : 0.3,
+        y: inView ? 0 : -30,
+        borderColor: inView ? gold : white,
+        transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
+      }}
+      className="inline-block px-10 py-6 border-2 bg-transparent backdrop-blur-xl rounded-xl"
+      style={{ transform: "rotate(-2deg)", transition: "all 1.6s ease" }}
+    >
+      <motion.span
+        style={{
+          background: inView ? `linear-gradient(to top, ${gold}, ${white})` : "none",
+          WebkitBackgroundClip: inView ? "text" : "unset",
+          color: inView ? "transparent" : white,
+          transition: "all 1.4s ease",
+        }}
+        className="inline-block text-6xl md:text-8xl font-light tracking-widest text-transparent"
+      >
+        FOREVER
+      </motion.span>
+    </motion.div>
+  );
+};
+
 const CelebrateLove: FC = () => {
   return (
     <section
@@ -73,112 +106,29 @@ const CelebrateLove: FC = () => {
       </div>
 
       {/* CONTENT */}
-   <div className="text-center max-w-5xl space-y-14 relative z-10">
+      <div className="text-center max-w-5xl space-y-14 relative z-10">
 
-  <AnimatedLine
-    className="text-6xl md:text-8xl font-light uppercase leading-tight"
-    delay={0}
-  >
-    Celebrate togetherness with moments  
-    that become forever stories
-  </AnimatedLine>
+        {/* Line before FOREVER */}
+        <AnimatedLine
+          className="text-6xl md:text-8xl font-light uppercase leading-tight"
+          delay={0}
+        >
+          Celebrate togetherness with moments that become
+        </AnimatedLine>
 
-  <AnimatedLine
-    className="text-5xl md:text-7xl font-light uppercase leading-tight"
-    delay={0.15}
-  >
-    Love, joy
-  </AnimatedLine>
+        {/* FOREVER card */}
+        <AnimatedForever />
 
-  {/* FOREVER CARD */}
-  <AnimatedForever />
+        {/* Line after FOREVER */}
+        <AnimatedLine
+          className="text-6xl md:text-8xl font-light uppercase leading-tight"
+          delay={0.2}
+        >
+          stories
+        </AnimatedLine>
 
-  <AnimatedLine
-    className="text-5xl md:text-7xl font-light uppercase leading-tight"
-    delay={0.45}
-  >
-    and memories
-  </AnimatedLine>
-
-  <AnimatedLine
-    className="text-6xl md:text-8xl font-light uppercase leading-tight"
-    delay={0.6}
-  >
-    captured beautifully
-  </AnimatedLine>
-
-  <AnimatedLine
-    className="text-6xl md:text-8xl font-light uppercase leading-tight"
-    delay={0.75}
-  >
-    for a lifetime.
-  </AnimatedLine>
-
-  <AnimatedParagraph />
-
-</div>
-
+      </div>
     </section>
-  );
-};
-
-// Separate animated card for FOREVER
-const AnimatedForever = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-20% 0px -20% 0px", once: false });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{
-        opacity: inView ? 1 : 0.3,
-        y: inView ? 0 : -30,
-        borderColor: inView ? gold : white,
-        transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
-      }}
-      className="inline-block px-10 py-6 border-2 bg-transparent backdrop-blur-xl rounded-xl"
-      style={{ transform: "rotate(-2deg)", transition: "all 1.6s ease" }}
-    >
-      <motion.span
-        style={{
-          background: inView
-            ? `linear-gradient(to top, ${gold}, ${white})`
-            : "none",
-          WebkitBackgroundClip: inView ? "text" : "unset",
-          color: inView ? "transparent" : white,
-          transition: "all 1.4s ease",
-        }}
-        className="inline-block text-6xl md:text-8xl font-light tracking-widest text-transparent"
-      >
-        FOREVER
-      </motion.span>
-    </motion.div>
-  );
-};
-
-// Paragraph independent animation
-const AnimatedParagraph = () => {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { margin: "-20% 0px -20% 0px", once: false });
-
-  return (
-    <motion.p
-      ref={ref}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{
-        opacity: inView ? 1 : 0.3,
-        y: inView ? 0 : -30,
-      }}
-      transition={{
-        duration: 1.6,
-        ease: [0.22, 1, 0.36, 1],
-        delay: 1,
-      }}
-      className="text-lg md:text-2xl max-w-2xl mx-auto leading-relaxed text-gray-300"
-    >
-      Elegant décor, magical ceremonies, and memories you’ll treasure forever.
-    </motion.p>
   );
 };
 

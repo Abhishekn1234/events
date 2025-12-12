@@ -2,7 +2,7 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import DripSection from "./Drip";
 import { useEffect, useRef, useState } from "react";
-
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 export default function About() {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -85,7 +85,7 @@ export default function About() {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed font-light tracking-wide"
           >
-            Hush Lush is your premier partner in crafting unforgettable experiences — 
+            Aalizah Events is your premier partner in crafting unforgettable experiences — 
             from dream weddings to seamless corporate events and intimate private 
             celebrations.
           </motion.p>
@@ -216,22 +216,13 @@ export default function About() {
                 />
 
                 {/* Aspect ratio 16:9 rectangular image */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <img
-                    src="/shdh.jpg"
-                    alt="Hush Lush Events"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  
-                  {/* Corner Decorations */}
-                  <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-purple-400" />
-                  <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-pink-400" />
-                  <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-purple-400" />
-                  <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-pink-400" />
-                </div>
+              <AspectRatio ratio={11 / 9} className="overflow-hidden rounded-2xl">
+      <img
+        src="/shdh.jpg"
+        alt="About section image"
+        className="h-full w-full object-cover"
+      />
+    </AspectRatio>
 
                 {/* Image Caption - Only shows when in view */}
                 <motion.div
@@ -300,7 +291,7 @@ export default function About() {
             }}
             viewport={{ once: true }}
           >
-            At Hush Lush, we specialize in curating exceptional wedding experiences,
+            At  Aalizah Events, we specialize in curating exceptional wedding experiences,
             flawlessly executed corporate functions, and stylish private parties.
             Our team of creative planners, coordinators, and photographers are
             committed to delivering elegance and precision in every detail. Whether
@@ -394,7 +385,7 @@ export default function About() {
               <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl shadow-purple-900/20 hover:shadow-purple-900/40 transition-all duration-500">
                 <div className="space-y-6">
                   <p className="text-gray-300 text-lg leading-relaxed md:leading-loose">
-                    At Hush Lush, we believe every design tells a story — a reflection of
+                    At Aalizah Events, we believe every design tells a story — a reflection of
                     passion, creativity, and the subtle details that make each piece truly unique.
                     Our journey is about capturing emotions and transforming them into experiences.
                   </p>
