@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <h2 className="text-xl font-semibold text-[#D4AF37] mb-6">Our Services</h2>
             <ul className="space-y-3 text-gray-300 text-lg">
-              <li><Link to="/services/wedding-planning" className="hover:text-[#D4AF37] transition">Wedding Planning</Link></li>
+              <li><Link to="/services/wedding-planning" className="hover:text-[#D4AF37] transition">Wedding Events</Link></li>
               <li><Link to="/services/corporate-events" className="hover:text-[#D4AF37] transition">Corporate Events</Link></li>
               <li><Link to="/services/private-parties" className="hover:text-[#D4AF37] transition">Private Parties</Link></li>
             </ul>
@@ -99,10 +99,37 @@ export default function Footer() {
       {/* Scroll to top button */}
 <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed bottom-10 right-10 w-14 h-14 bg-[#D4AF37] text-black rounded-full flex items-center justify-center text-3xl hover:scale-110 transition"
+  className="
+    fixed
+    bottom-4 right-4
+    sm:bottom-6 sm:right-6
+    md:bottom-10 md:right-10
+
+    w-10 h-10
+    sm:w-12 sm:h-12
+    md:w-14 md:h-14
+
+    bg-[#D4AF37]
+    text-black
+    rounded-full
+    flex items-center justify-center
+
+    text-xl
+    sm:text-2xl
+    md:text-3xl
+
+    shadow-lg
+    z-50
+
+    transition-transform duration-300
+    active:scale-95
+    md:hover:scale-110
+  "
+  aria-label="Scroll to top"
 >
   ↑
 </button>
+
 
 
     </footer>

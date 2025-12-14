@@ -182,46 +182,90 @@
 
 
 
+"use client";
+
 import { FC, useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const ServicesSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slideWidth, setSlideWidth] = useState(0);
+type CardSlide = {
+  type: "card";
+  title: string;
+  subtitle: string;
+  description: string;
+  image: {
+    src: string;
+    title: string;
+  };
+};
 
-  const slides = [
-    {
-      type: "card",
-      title: "AALIZAH",
-      subtitle: "LUXURY",
-      description: "CELEBRATIONS",
-      image: { src: "/4ed87292688611ad8471655d7e029e78.jpg", title: "Wedding Planning" },
+type ImagesSlide = {
+  type: "images";
+  images: {
+    src: string;
+    title: string;
+  }[];
+};
+
+type SingleImageSlide = {
+  type: "singleImage";
+  image: {
+    src: string;
+    title: string;
+  };
+};
+
+type Slide = CardSlide | ImagesSlide | SingleImageSlide;
+
+  const slides: Slide[] = [
+  {
+    type: "card",
+    title: "AALIZAH",
+    subtitle: "LUXURY",
+    description: "CELEBRATIONS",
+    image: {
+      src: "/4ed87292688611ad8471655d7e029e78.jpg",
+      title: "Wedding Events",
     },
-    {
-      type: "images",
-      images: [
-        { src: "/8e8c090b023114191e642071528acb33.jpg", title: "Corporate Events" },
-        { src: "/68439ece091407b13f240b822af574cf.jpg", title: "Private Events" },
-      ],
+  },
+  {
+    type: "images",
+    images: [
+      {
+        src: "/8e8c090b023114191e642071528acb33.jpg",
+        title: "Corporate Events",
+      },
+      {
+        src: "/68439ece091407b13f240b822af574cf.jpg",
+        title: "Private Events",
+      },
+    ],
+  },
+  {
+    type: "singleImage",
+    image: {
+      src: "/ss.jpg",
+      title: "Photography",
     },
-    {
-      type: "singleImage",
-      image: { src: "/ss.jpg", title: "Photography" },
-    },
-  ];
+  },
+];
 
   // Update width on resize
   useEffect(() => {
     const updateWidth = () => {
-      if (containerRef.current) setSlideWidth(containerRef.current.offsetWidth);
+      if (containerRef.current) {
+        setSlideWidth(containerRef.current.offsetWidth);
+      }
     };
     updateWidth();
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  // Auto-slide every 5 seconds
+  // Auto slide
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -230,96 +274,99 @@ const ServicesSection: FC = () => {
   }, [slides.length]);
 
   return (
-    <div className="bg-black text-white relative min-h-screen overflow-hidden">
-      {/* Carousel */}
+    <div className="bg-black text-white min-h-screen overflow-hidden">
       <motion.div
-    ref={containerRef}
-    className="flex select-none cursor-default transition-transform"
-    animate={{ x: -currentSlide * slideWidth }}
-    transition={{ type: "spring", stiffness: 80, damping: 25 }}
-  >
-    {slides.map((slide, index) => (
-      <div
-        key={index}
-        className="flex-shrink-0 w-full flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-0"
+        ref={containerRef}
+        className="flex"
+        animate={{ x: -currentSlide * slideWidth }}
+        transition={{ type: "spring", stiffness: 80, damping: 25 }}
       >
-        {/* Card Slide */}
-        {slide.type === "card" && (
-          <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-6 md:gap-8 lg:gap-10">
-            <div className="w-full lg:w-[45%] text-center lg:text-left mb-6 lg:mb-0">
-              <h1 className="text-[#d9c15e] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4">
-                {slide.title}
-              </h1>
-              {slide.subtitle && (
-                <div className="inline-block mb-4 md:mb-6 rotate-[-3deg] bg-[#9d622b] px-4 py-2 md:px-6 md:py-3">
-                  <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wide">
-                    {slide.subtitle}
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-full min-h-[70vh] flex items-center justify-center px-4 md:px-8"
+          >
+            {/* CARD SLIDE */}
+            {slide.type === "card" && (
+              <div className="w-full max-w-7xl flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div className="w-full lg:w-1/2 text-center lg:text-left">
+                  <h1 className="text-[#d9c15e] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4">
+                    {slide.title}
+                  </h1>
+
+                  <div className="inline-block mb-6 rotate-[-3deg] bg-[#9d622b] px-6 py-3">
+                    <p className="text-white text-3xl md:text-4xl lg:text-5xl">
+                      {slide.subtitle}
+                    </p>
+                  </div>
+
+                  <p className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light">
+                    {slide.description}
                   </p>
                 </div>
-              )}
-              {slide.description && (
-                <p className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light">
-                  {slide.description}
-                </p>
-              )}
-            </div>
-            <motion.div
-              className="relative w-full lg:w-[45%] max-w-2xl"
-              whileHover={{ scale: 1.05, rotate: 0 }}
-            >
-              <img
-                src={slide.image?.src}
-                alt={slide.image?.title || "Slide image"}
-                className="w-full h-auto max-h-[60vh] object-cover transform -rotate-10"
-              />
-              <p className="absolute bottom-4 left-4 text-white text-xl md:text-2xl font-medium bg-black/50 px-3 py-1 rounded">
-                {slide.image?.title}
-              </p>
-            </motion.div>
-          </div>
-        )}
 
-        {/* Multiple Images Slide */}
-        {slide.type === "images" && slide.images && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
-            {slide.images.map((img, i) => (
-              <motion.div
-                key={i}
-                className="relative w-full"
-                whileHover={{ scale: 1.05, rotate: 0 }}
-              >
-                <img
-                  src={img.src}
-                  className="w-full h-auto max-h-[50vh] object-cover transform -rotate-10"
-                  alt={img.title}
-                />
-                <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium bg-black/50 px-2 py-1 rounded">
-                  {img.title}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* Single Image Slide */}
-        {slide.type === "singleImage" && slide.image && (
-          <motion.div
-            className="relative w-full max-w-2xl"
-            whileHover={{ scale: 1.05, rotate: 0 }}
-          >
-            <img
-              src={slide.image.src}
-              className="w-full h-auto max-h-[60vh] object-cover transform -rotate-10"
-              alt={slide.image.title}
-            />
-            <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium bg-black/50 px-2 py-1 rounded">
-              {slide.image.title}
-            </p>
-          </motion.div>
-        )}
-      </div>
-    ))}
+                <div className="w-full flex justify-center lg:justify-end">
+  <motion.div
+    className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
+    whileHover={{ scale: 1.05 }}
+  >
+    <img
+      src={slide.image.src}
+      alt={slide.image.title}
+      className="w-full aspect-[3/4] object-cover -rotate-10"
+    />
+    <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
+      {slide.image.title}
+    </p>
   </motion.div>
+</div>
+
+              </div>
+            )}
+
+            {/* MULTIPLE IMAGES SLIDE */}
+            {slide.type === "images" && (
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 place-items-center">
+  {slide.images.map((img, i) => (
+    <motion.div
+      key={i}
+      className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
+      whileHover={{ scale: 1.05 }}
+    >
+      <img
+        src={img.src}
+        alt={img.title}
+        className="w-full aspect-[3/4] object-cover -rotate-10"
+      />
+      <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
+        {img.title}
+      </p>
+    </motion.div>
+  ))}
+</div>
+
+            )}
+
+            {/* SINGLE IMAGE SLIDE */}
+            {slide.type === "singleImage" && (
+             <motion.div
+  className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
+  whileHover={{ scale: 1.05 }}
+>
+  <img
+    src={slide.image.src}
+    alt={slide.image.title}
+    className="w-full aspect-[3/4] object-cover -rotate-10"
+  />
+  <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
+    {slide.image.title}
+  </p>
+</motion.div>
+
+            )}
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 };

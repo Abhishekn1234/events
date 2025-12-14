@@ -74,6 +74,7 @@ export default function Private() {
     );
   };
 
+
   interface CardData {
     title: string;
     desc: string;
@@ -87,10 +88,7 @@ export default function Private() {
     icon: string | JSX.Element;
   }
 
-  interface HighlightItem {
-    id: number;
-    img: string;
-  }
+ 
 
   const cardData: CardData[] = [
     {
@@ -152,16 +150,7 @@ useEffect(() => {
     behavior: "smooth",
   });
 }, []);
-  const highlights: HighlightItem[] = [
-    { id: 1, img: "/event highlights 4.jpg" },
-    { id: 2, img: "/luxury & lifestyle.jpg" },
-    { id: 3, img: "/luxury & lifestyle1.jpg" },
-    { id: 4, img: "/wedpic3.jpg" },
-    { id: 5, img: "/wedpic4.jpg" },
-    { id: 6, img: "/wedpic7.jpg" },
-    { id: 7, img: "/wedpic8.jpg" },
-    { id: 8, img: "/wedpic12.jpg" },
-  ];
+
 
   return (
     <div ref={containerRef} className="relative">
@@ -346,7 +335,7 @@ useEffect(() => {
       </section>
 
       {/* EVENT HIGHLIGHTS SECTION */}
-      <section className="w-full min-h-screen py-24 bg-gradient-to-b from-black to-gray-900">
+      {/* <section className="w-full min-h-screen py-24 bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal 
             showProgress={section3Show} 
@@ -398,7 +387,7 @@ useEffect(() => {
             </div>
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       {/* VIDEO SECTION */}
       {/* <section className="w-full min-h-screen py-24 bg-gradient-to-b from-gray-900 to-black text-white">
