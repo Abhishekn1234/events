@@ -239,15 +239,15 @@ type Slide = CardSlide | ImagesSlide | SingleImageSlide;
         title: "Corporate Events",
       },
       {
-        src: "/68439ece091407b13f240b822af574cf.jpg",
-        title: "Private Events",
+        src: "/private parties home.jpg",
+        title: "Private Parties",
       },
     ],
   },
   {
     type: "singleImage",
     image: {
-      src: "/ss.jpg",
+      src: "/photography 2.jpg",
       title: "Photography",
     },
   },
