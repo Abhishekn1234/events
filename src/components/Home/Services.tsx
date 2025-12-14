@@ -187,10 +187,6 @@
 import { FC, useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const ServicesSection: FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideWidth, setSlideWidth] = useState(0);
 type CardSlide = {
   type: "card";
   title: string;
@@ -210,48 +206,44 @@ type ImagesSlide = {
   }[];
 };
 
-type SingleImageSlide = {
-  type: "singleImage";
-  image: {
-    src: string;
-    title: string;
-  };
-};
+type Slide = CardSlide | ImagesSlide;
 
-type Slide = CardSlide | ImagesSlide | SingleImageSlide;
+const ServicesSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideWidth, setSlideWidth] = useState(0);
 
   const slides: Slide[] = [
-  {
-    type: "card",
-    title: "AALIZAH",
-    subtitle: "LUXURY",
-    description: "CELEBRATIONS",
-    image: {
-      src: "/4ed87292688611ad8471655d7e029e78.jpg",
-      title: "Wedding Events",
-    },
-  },
-  {
-    type: "images",
-    images: [
-      {
-        src: "/8e8c090b023114191e642071528acb33.jpg",
-        title: "Corporate Events",
+    {
+      type: "card",
+      title: "AALIZAH",
+      subtitle: "LUXURY",
+      description: "CELEBRATIONS",
+      image: {
+        src: "/4ed87292688611ad8471655d7e029e78.jpg",
+        title: "Wedding Events",
       },
-      {
-        src: "/private parties home.jpg",
-        title: "Private Parties",
-      },
-    ],
-  },
-  {
-    type: "singleImage",
-    image: {
-      src: "/photography 2.jpg",
-      title: "Photography",
     },
-  },
-];
+
+    // ✅ ALL 3 IMAGES IN ONE SLIDE
+    {
+      type: "images",
+      images: [
+        {
+          src: "/8e8c090b023114191e642071528acb33.jpg",
+          title: "Corporate Events",
+        },
+        {
+          src: "/private parties home.jpg",
+          title: "Private Parties",
+        },
+        {
+          src: "/photography 2.jpg",
+          title: "Photography",
+        },
+      ],
+    },
+  ];
 
   // Update width on resize
   useEffect(() => {
@@ -306,63 +298,43 @@ type Slide = CardSlide | ImagesSlide | SingleImageSlide;
                 </div>
 
                 <div className="w-full flex justify-center lg:justify-end">
-  <motion.div
-    className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
-    whileHover={{ scale: 1.05 }}
-  >
-    <img
-      src={slide.image.src}
-      alt={slide.image.title}
-      className="w-full aspect-[3/4] object-cover -rotate-10"
-    />
-    <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
-      {slide.image.title}
-    </p>
-  </motion.div>
-</div>
-
+                  <motion.div
+                    className="relative w-full max-w-[520px]"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img
+                      src={slide.image.src}
+                      alt={slide.image.title}
+                      className="w-full aspect-[3/4] object-cover -rotate-10"
+                    />
+                    <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg rounded">
+                      {slide.image.title}
+                    </p>
+                  </motion.div>
+                </div>
               </div>
             )}
 
-            {/* MULTIPLE IMAGES SLIDE */}
+            {/* 3 IMAGES SLIDE */}
             {slide.type === "images" && (
-              <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 place-items-center">
-  {slide.images.map((img, i) => (
-    <motion.div
-      key={i}
-      className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
-      whileHover={{ scale: 1.05 }}
-    >
-      <img
-        src={img.src}
-        alt={img.title}
-        className="w-full aspect-[3/4] object-cover -rotate-10"
-      />
-      <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
-        {img.title}
-      </p>
-    </motion.div>
-  ))}
-</div>
-
-            )}
-
-            {/* SINGLE IMAGE SLIDE */}
-            {slide.type === "singleImage" && (
-             <motion.div
-  className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[520px]"
-  whileHover={{ scale: 1.05 }}
->
-  <img
-    src={slide.image.src}
-    alt={slide.image.title}
-    className="w-full aspect-[3/4] object-cover -rotate-10"
-  />
-  <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg sm:text-xl rounded">
-    {slide.image.title}
-  </p>
-</motion.div>
-
+              <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+                {slide.images.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    className="relative w-full max-w-[420px]"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.title}
+                      className="w-full aspect-[3/4] object-cover -rotate-10"
+                    />
+                    <p className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-lg rounded">
+                      {img.title}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             )}
           </div>
         ))}
@@ -372,3 +344,4 @@ type Slide = CardSlide | ImagesSlide | SingleImageSlide;
 };
 
 export default ServicesSection;
+

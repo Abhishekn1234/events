@@ -35,46 +35,79 @@ export default function Gallery() {
       <div className="w-full">
 
         {/* ================= HERO SECTION ================= */}
-        <section
-          ref={ref1}
-          className="relative h-screen w-full bg-black overflow-hidden
-          flex items-center justify-center text-center px-6"
-        >
-          {/* Background image (shows ONLY when in view) */}
-          <div
-            className={`absolute inset-0 transition-all duration-1000 ease-out will-change-transform will-change-opacity
-              ${visible1 ? "opacity-100 scale-100" : "opacity-0 scale-110"}
-            `}
-            style={{
-              backgroundImage: "url('/hello.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+       {/* ================= HERO SECTION ================= */}
+<section
+  ref={ref1}
+  className="relative h-screen w-full bg-black overflow-hidden
+  flex items-center justify-center text-center px-6"
+>
+  {/* Background image */}
+  <div
+    className={`absolute inset-0 transition-all duration-1000 ease-out
+      ${visible1 ? "opacity-100 scale-100" : "opacity-0 scale-110"}
+    `}
+    style={{
+      backgroundImage: "url('/hello.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  />
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/70" />
+  {/* Warm side light (luxury feel) */}
+  <div
+    className={`absolute inset-0 pointer-events-none transition-opacity duration-1000
+      ${visible1 ? "opacity-100" : "opacity-0"}
+    `}
+    style={{
+      background:
+        "linear-gradient(120deg, rgba(255,215,160,0.28) 0%, transparent 55%)",
+    }}
+  />
 
-          {/* Content */}
-          <div
-            className={`relative z-10 max-w-3xl transition-all duration-700
-              ${visible1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-            `}
-          >
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#F5E6C8] tracking-wide">
-              Gallery
-            </h1>
+  {/* Center spotlight (image clarity) */}
+  <div
+    className={`absolute inset-0 pointer-events-none transition-opacity duration-1000
+      ${visible1 ? "opacity-100" : "opacity-0"}
+    `}
+    style={{
+      background:
+        "radial-gradient(circle at center, rgba(255,255,255,0.18) 0%, transparent 60%)",
+    }}
+  />
 
-            <p className="text-lg text-white/85 mt-4">
-              A Visual Journey of Our Events
-            </p>
+  {/* Subtle vignette (cinematic edges) */}
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
+      background:
+        "radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.45) 100%)",
+    }}
+  />
 
-            <p className="text-base text-white/65 mt-3 leading-relaxed">
-              A storytelling journey through our events—from vibrant celebrations to intimate
-              gatherings, each frame captures a unique and magical story.
-            </p>
-          </div>
-        </section>
+  {/* Dark overlay (REDUCED) */}
+  <div className="absolute inset-0 bg-black/50" />
+
+  {/* Content */}
+  <div
+    className={`relative z-10 max-w-3xl transition-all duration-700
+      ${visible1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+    `}
+  >
+    <h1 className="text-4xl md:text-5xl font-extrabold text-[#F5E6C8] tracking-wide">
+      Gallery
+    </h1>
+
+    <p className="text-lg text-white/90 mt-4">
+      A Visual Journey of Our Events
+    </p>
+
+    <p className="text-base text-white/70 mt-3 leading-relaxed">
+      A storytelling journey through our events—from vibrant celebrations to intimate
+      gatherings, each frame captures a unique and magical story.
+    </p>
+  </div>
+</section>
+
 
         {/* ================= HIGHLIGHTS ================= */}
         <section
