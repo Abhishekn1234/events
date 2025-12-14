@@ -79,7 +79,7 @@ export default function Corporate() {
         "Annual Dinners & Gala Nights",
         "Award Ceremonies",
       ],
-      image: "/a0fd3abb31d8d1126603b3a4940a1a3c.jpg",
+      image: "/business & networking.jpg",
     },
     {
       title: "Team Engagement",
@@ -100,7 +100,7 @@ export default function Corporate() {
         "Pop-up Events",
         "Press Conferences & Media Events",
       ],
-      image: "/What is a Marketing Campaign_.jpg",
+      image: "/brand and marketing.jpg",
     },
   ];
 
@@ -111,7 +111,7 @@ export default function Corporate() {
         <div
           className="absolute inset-0 bg-black/50 z-0"
           style={{
-            backgroundImage: "url('/c8029469e9368eecc50796d840d596ec.jpg')",
+            backgroundImage: "url('/corp.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -253,7 +253,7 @@ export default function Corporate() {
       ))}
 
       {/* ---------------- VIDEO SECTION ---------------- */}
-      <motion.section
+      {/* <motion.section
         className="w-full py-12 md:py-16 bg-gradient-to-b from-black to-gray-900 text-white text-center px-4 md:px-6"
         initial="hidden"
         whileInView="show"
@@ -336,7 +336,7 @@ export default function Corporate() {
         <div className="mt-16 md:mt-24">
           <DripSection />
         </div>
-      </motion.section>
+      </motion.section> */}
     </div>
   );
 }

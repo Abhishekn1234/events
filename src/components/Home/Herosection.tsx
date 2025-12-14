@@ -28,7 +28,7 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
       <motion.video
         style={{ opacity, scale }}
         className="absolute inset-0 w-full h-full object-cover"
-        src="/copy_75A3E4C5-A050-40FE-9DF2-C01C468BA720.mov"
+        src="/IMG_05789.mov"
         autoPlay
         loop
         muted

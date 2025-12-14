@@ -102,7 +102,7 @@ export default function Navbar() {
       onClick={() => navigation("/services/wedding-planning")}
       className="hover:bg-white/10 cursor-pointer"
     >
-      Wedding Planning
+      Wedding Events
     </DropdownMenuItem>
 
     <DropdownMenuItem
@@ -209,7 +209,7 @@ export default function Navbar() {
                             onClick={handleMobileLinkClick}
                             className="text-white/80 hover:text-primary"
                           >
-                            Wedding Planning
+                            Wedding Event
                           </Link>
 
                           <Link

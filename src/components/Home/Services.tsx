@@ -233,96 +233,93 @@ const ServicesSection: FC = () => {
     <div className="bg-black text-white relative min-h-screen overflow-hidden">
       {/* Carousel */}
       <motion.div
-        ref={containerRef}
-        className="flex h-screen select-none cursor-default"
-        animate={{ x: -currentSlide * slideWidth }}
-        transition={{ type: "spring", stiffness: 80, damping: 25 }}
+    ref={containerRef}
+    className="flex select-none cursor-default transition-transform"
+    animate={{ x: -currentSlide * slideWidth }}
+    transition={{ type: "spring", stiffness: 80, damping: 25 }}
+  >
+    {slides.map((slide, index) => (
+      <div
+        key={index}
+        className="flex-shrink-0 w-full flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-0"
       >
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 w-full h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10"
-          >
-            {/* Card Slide */}
-            {slide.type === "card" && (
-              <div className="flex flex-col lg:flex-row w-full h-full items-center justify-between gap-6 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-12 lg:px-20">
-                <div className="w-full lg:w-[45%] text-center lg:text-left pt-10 lg:pt-0">
-                  <h1 className="text-[#d9c15e] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-4">
-                    {slide.title}
-                  </h1>
-                  {slide.subtitle && (
-                    <div className="inline-block mb-4 md:mb-6 rotate-[-3deg] bg-[#9d622b] px-4 py-2 md:px-6 md:py-3 transition-transform duration-300 hover:scale-105">
-                      <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wide">
-                        {slide.subtitle}
-                      </p>
-                    </div>
-                  )}
-                  {slide.description && (
-                    <p className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight transition-transform duration-300 hover:scale-105">
-                      {slide.description}
-                    </p>
-                  )}
-                </div>
-                <motion.div
-                  className="relative w-full lg:w-[45%] max-w-2xl cursor-pointer"
-                  whileHover={{ scale: 1.05, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 150 }}
-                >
-                  <img
-                    src={slide.image?.src}
-                    alt={slide.image?.title || "Slide image"}
-                    className="w-full aspect-[4/3] sm:aspect-[5/4] object-cover transform -rotate-10"
-                  />
-                  <p className="absolute bottom-4 left-4 text-white text-xl md:text-2xl font-medium bg-black/50 px-3 py-1 rounded">
-                    {slide.image?.title}
+        {/* Card Slide */}
+        {slide.type === "card" && (
+          <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-6 md:gap-8 lg:gap-10">
+            <div className="w-full lg:w-[45%] text-center lg:text-left mb-6 lg:mb-0">
+              <h1 className="text-[#d9c15e] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4">
+                {slide.title}
+              </h1>
+              {slide.subtitle && (
+                <div className="inline-block mb-4 md:mb-6 rotate-[-3deg] bg-[#9d622b] px-4 py-2 md:px-6 md:py-3">
+                  <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wide">
+                    {slide.subtitle}
                   </p>
-                </motion.div>
-              </div>
-            )}
+                </div>
+              )}
+              {slide.description && (
+                <p className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light">
+                  {slide.description}
+                </p>
+              )}
+            </div>
+            <motion.div
+              className="relative w-full lg:w-[45%] max-w-2xl"
+              whileHover={{ scale: 1.05, rotate: 0 }}
+            >
+              <img
+                src={slide.image?.src}
+                alt={slide.image?.title || "Slide image"}
+                className="w-full h-auto max-h-[60vh] object-cover transform -rotate-10"
+              />
+              <p className="absolute bottom-4 left-4 text-white text-xl md:text-2xl font-medium bg-black/50 px-3 py-1 rounded">
+                {slide.image?.title}
+              </p>
+            </motion.div>
+          </div>
+        )}
 
-            {/* Multiple Images Slide */}
-            {slide.type === "images" && slide.images && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 w-full h-full items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20">
-                {slide.images.map((img, i) => (
-                  <motion.div
-                    key={i}
-                    className="relative w-full cursor-pointer"
-                    whileHover={{ scale: 1.05, rotate: 0 }}
-                    transition={{ type: "spring", stiffness: 150 }}
-                  >
-                    <img
-                      src={img.src}
-                      className="w-full aspect-[4/3] sm:aspect-[5/4] object-cover transform -rotate-10"
-                      alt={img.title}
-                    />
-                    <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium">
-                      {img.title}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-
-            {/* Single Image Slide */}
-            {slide.type === "singleImage" && slide.image && (
+        {/* Multiple Images Slide */}
+        {slide.type === "images" && slide.images && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
+            {slide.images.map((img, i) => (
               <motion.div
-                className="relative w-full max-w-2xl cursor-pointer"
+                key={i}
+                className="relative w-full"
                 whileHover={{ scale: 1.05, rotate: 0 }}
-                transition={{ type: "spring", stiffness: 150 }}
               >
                 <img
-                  src={slide.image.src}
-                  className="w-full aspect-[4/3] sm:aspect-[5/4] object-cover transform -rotate-10"
-                  alt={slide.image.title}
+                  src={img.src}
+                  className="w-full h-auto max-h-[50vh] object-cover transform -rotate-10"
+                  alt={img.title}
                 />
-                <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium">
-                  {slide.image.title}
+                <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium bg-black/50 px-2 py-1 rounded">
+                  {img.title}
                 </p>
               </motion.div>
-            )}
+            ))}
           </div>
-        ))}
-      </motion.div>
+        )}
+
+        {/* Single Image Slide */}
+        {slide.type === "singleImage" && slide.image && (
+          <motion.div
+            className="relative w-full max-w-2xl"
+            whileHover={{ scale: 1.05, rotate: 0 }}
+          >
+            <img
+              src={slide.image.src}
+              className="w-full h-auto max-h-[60vh] object-cover transform -rotate-10"
+              alt={slide.image.title}
+            />
+            <p className="absolute bottom-3 left-3 text-white text-xl md:text-2xl font-medium bg-black/50 px-2 py-1 rounded">
+              {slide.image.title}
+            </p>
+          </motion.div>
+        )}
+      </div>
+    ))}
+  </motion.div>
     </div>
   );
 };

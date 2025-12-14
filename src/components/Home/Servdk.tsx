@@ -1,29 +1,19 @@
-import React, { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Events from "./Events";
 
-// --------------------------------------------------------
-// ANGLED BLOCK COMPONENT (RESPONSIVE)
-// --------------------------------------------------------
+// -----------------------------
+// ANGLED BLOCK
+// -----------------------------
 interface AngledBlockProps {
   text: string;
   color: string;
   rotateBase: number;
   index: number;
+  isMobile: boolean;
 }
-
-const AngledBlock: React.FC<AngledBlockProps> = ({
-  text,
-  color,
-  rotateBase,
-  index,
-}) => {
+const AngledBlock: React.FC<AngledBlockProps> = ({ text, color, rotateBase, index, isMobile }) => {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -32,8 +22,16 @@ const AngledBlock: React.FC<AngledBlockProps> = ({
   });
 
   // Scroll-based animations
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.08, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    isMobile ? [0.85, 1, 0.9] : [0.8, 1.08, 0.9]
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    isMobile ? [0, 1, 0.7] : [0, 1, 0]
+  );
   const rotate = useTransform(
     scrollYProgress,
     [0, 1],
@@ -47,17 +45,20 @@ const AngledBlock: React.FC<AngledBlockProps> = ({
     <motion.div
       ref={ref}
       style={{ scale, opacity, rotate }}
-      className="w-[90vw] sm:w-[88vw] max-w-[680px] h-[80px] sm:h-[90px] md:h-[110px] flex items-center justify-center absolute"
-      initial={{ y: index * 70 }} // Adjusted for smaller screens
+      className={`
+        ${isMobile ? "w-[70vw] h-[60px]" : "w-[90vw] sm:w-[88vw] max-w-[680px] h-[80px] sm:h-[90px] md:h-[110px]"}
+        flex items-center justify-center absolute
+      `}
+      initial={{ y: isMobile ? index * 50 : index * 70 }}
     >
       <div
         style={{ backgroundColor: color }}
-        className="w-full h-full flex items-center justify-center rounded-[6px] px-4" // Added padding for small screens
+        className={`w-full h-full flex items-center justify-center rounded-[6px] px-4`}
       >
         <div
           className={`
             ${textColor} 
-            text-[28px] sm:text-[36px] md:text-[44px] lg:text-[50px] 
+            ${isMobile ? "text-[22px]" : "text-[28px] sm:text-[36px] md:text-[44px] lg:text-[50px]"}
             uppercase tracking-[2px] sm:tracking-[3px] md:tracking-[4px] 
             font-black ${textShadowClass} leading-tight text-center
             whitespace-nowrap overflow-hidden
@@ -70,9 +71,10 @@ const AngledBlock: React.FC<AngledBlockProps> = ({
   );
 };
 
-// --------------------------------------------------------
-// VIDEO PLACEHOLDER (RESPONSIVE)
-// --------------------------------------------------------
+
+// -----------------------------
+// VIDEO PLACEHOLDER
+// -----------------------------
 const VideoPlaceholder = () => {
   const textSegments = Array.from({ length: 4 }, (_, i) => ({
     text: "PLAY VIDEO",
@@ -80,28 +82,19 @@ const VideoPlaceholder = () => {
   }));
 
   const PlayIcon = () => (
-    <div className="absolute z-20 w-0 h-0 
-      border-t-[6px] sm:border-t-[8px] md:border-t-[10px] 
-      border-b-[6px] sm:border-b-[8px] md:border-b-[10px] 
-      border-l-[12px] sm:border-l-[15px] md:border-l-[18px] 
-      border-t-transparent border-b-transparent border-l-white 
-      ml-1" />
+    <div className="absolute z-20 w-0 h-0 border-t-[6px] sm:border-t-[8px] md:border-t-[10px] border-b-[6px] sm:border-b-[8px] md:border-b-[10px] border-l-[12px] sm:border-l-[15px] md:border-l-[18px] border-t-transparent border-b-transparent border-l-white ml-1" />
   );
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="absolute w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[80px] md:h-[80px] 
-        bg-white/10 rounded-full flex items-center justify-center z-10">
+      <div className="absolute w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[80px] md:h-[80px] bg-white/10 rounded-full flex items-center justify-center z-10">
         <PlayIcon />
       </div>
 
       {textSegments.map((segment, index) => (
         <div
           key={index}
-          className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] 
-            flex items-start justify-center text-white/80 font-serif 
-            tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px] 
-            text-[10px] sm:text-[11px] md:text-xs"
+          className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] flex items-start justify-center text-white/80 font-serif tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px] text-[10px] sm:text-[11px] md:text-xs"
           style={{ transform: `rotate(${segment.rotate}deg)` }}
         >
           <span
@@ -116,9 +109,9 @@ const VideoPlaceholder = () => {
   );
 };
 
-// --------------------------------------------------------
-// MAIN COMPONENT (RESPONSIVE)
-// --------------------------------------------------------
+// -----------------------------
+// MAIN COMPONENT
+// -----------------------------
 const ScrollHighlight: React.FC = () => {
   const items = [
     { text: "CUSTOM PLANS", color: "#BA8966", rotate: 4 },
@@ -127,12 +120,19 @@ const ScrollHighlight: React.FC = () => {
     { text: "LASTING JOY", color: "#F9D860", rotate: -4 },
   ];
 
-  // Section in-view detection
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [sectionRef, sectionInView] = useInView({
-    threshold: 0.3,
+    threshold: isMobile ? 0.1 : 0.3,
   });
 
-  // Video scroll animation target
   const videoRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -140,36 +140,11 @@ const ScrollHighlight: React.FC = () => {
     offset: ["start end", "center center"],
   });
 
-  // Responsive video dimensions
-  const width = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    ["150px", "100%"] // Smaller start for mobile
-  );
-  
-  const height = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    ["150px", "300px"] // Smaller height for mobile
-  );
-  
-  const borderRadius = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    ["50%", "12px"]
-  );
-  
-  const placeholderOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6],
-    [1, 1, 0]
-  );
-  
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    [0, 0.6, 1],
-    ["#181818", "#181818", "transparent"]
-  );
+  const width = useTransform(scrollYProgress, [0, 1], [isMobile ? "120px" : "150px", "100%"]);
+  const height = useTransform(scrollYProgress, [0, 1], [isMobile ? "120px" : "150px", "300px"]);
+  const borderRadius = useTransform(scrollYProgress, [0, 1], ["50%", "12px"]);
+  const placeholderOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 1, 0]);
+  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 1], ["#181818", "#181818", "transparent"]);
 
   return (
     <div
@@ -196,19 +171,18 @@ const ScrollHighlight: React.FC = () => {
               color={item.color}
               index={i}
               rotateBase={item.rotate}
+              isMobile={isMobile}
             />
           ))}
         </div>
       </div>
 
-      {/* "And More..." Text */}
+      {/* "And More..." */}
       <div className="text-xl sm:text-2xl md:text-3xl text-gray-300 mt-[-60px] sm:mt-[-90px] md:mt-[-120px] text-center">
         And More...
       </div>
 
-      {/* ------------------------------------------------- */}
-      {/*       VIDEO SCROLL + ENTER / EXIT ANIMATIONS      */}
-      {/* ------------------------------------------------- */}
+      {/* VIDEO SCROLL */}
       <div className="w-full flex justify-center mt-8 md:mt-10 mb-16 md:mb-20 min-h-[300px] md:min-h-[400px] px-4">
         <div ref={videoRef} className="w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[900px] relative">
           <AnimatePresence mode="wait">
@@ -231,10 +205,7 @@ const ScrollHighlight: React.FC = () => {
                   style={{ width, height, borderRadius, backgroundColor }}
                   className="overflow-hidden shadow-2xl relative mx-auto"
                 >
-                  <motion.div
-                    style={{ opacity: placeholderOpacity }}
-                    className="absolute inset-0 z-30"
-                  >
+                  <motion.div style={{ opacity: placeholderOpacity }} className="absolute inset-0 z-30">
                     <VideoPlaceholder />
                   </motion.div>
 

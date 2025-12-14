@@ -1,16 +1,20 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { spring } from "framer-motion";
 import { mobileItemVariants } from "./mobileitem";
 import { itemVariants } from "./itemvariant";
 export default function Events() {
   const [isActive, setIsActive] = useState(false);
-  const [ref, inView] = useInView({
-    threshold: [0.2, 0.8],
-    triggerOnce: false,
-  });
-
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [inViewRef, inView] = useInView({
+  threshold: [0.2, 0.8],
+  triggerOnce: false,
+});
+const setRefs = (node: HTMLElement | null) => {
+  sectionRef.current = node;
+  inViewRef(node); // pass to intersection observer
+};
   // Track scroll direction
   const [scrollDirection, setScrollDirection] = useState("down");
   const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -124,12 +128,17 @@ const headingVariants = {
 } as const;
 
 
+const handleScrollToBottom = () => {
+  if (sectionRef.current) {
+    sectionRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  }
+};
 
 
 
   return (
     <section
-      ref={ref}
+      ref={setRefs} 
       className="w-full bg-[#F7E6D8] overflow-hidden relative py-20 min-h-screen flex flex-col justify-center"
     >
       {/* BACKGROUND DECORATION */}
@@ -259,23 +268,25 @@ const headingVariants = {
       </motion.div>
 
       {/* SCROLL INDICATOR */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isActive ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className="hidden md:flex justify-center mt-12"
-      >
-        <div className="flex items-center gap-2 text-gray-600">
-          <motion.div
-            animate={isActive ? { y: [0, -10, 0] } : { y: 0 }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-2xl"
-          >
-            ↓
-          </motion.div>
-          <span className="text-sm">Scroll to see more</span>
-        </div>
-      </motion.div>
+    <motion.div
+  initial={{ opacity: 0 }}
+  animate={isActive ? { opacity: 1 } : { opacity: 0 }}
+  transition={{ duration: 0.5 }}
+  className="hidden md:flex justify-center mt-12"
+  onClick={handleScrollToBottom} // <-- Add this
+>
+  <div className="flex items-center gap-2 text-gray-600 cursor-pointer">
+    <motion.div
+      animate={isActive ? { y: [0, -10, 0] } : { y: 0 }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+      className="text-2xl"
+    >
+      ↓
+    </motion.div>
+    <span className="text-sm">Scroll to see more</span>
+  </div>
+</motion.div>
+
     </section>
   );
 }

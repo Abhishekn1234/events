@@ -114,7 +114,7 @@ export default function Private() {
         "House/Villa & Rooftop Parties",
         "Garden & Poolside Events",
       ],
-      img: "/68439ece091407b13f240b822af574cf.jpg",
+      img: "/yatch parties.jpg",
     },
     {
       title: "Full-Scale Production",
@@ -125,7 +125,7 @@ export default function Private() {
         "Custom Photo Booths & Props",
         "Interactive Entertainment & MCs",
       ],
-      img: "/full scale producation.jpg",
+      img: "/full scale production.jpg",
     },
   ];
 
@@ -169,7 +169,7 @@ useEffect(() => {
       <section 
         className="relative w-full min-h-screen bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: "url('/68439ece091407b13f240b822af574cf.jpg')",
+          backgroundImage: "url('/private parties.jpg')",
           backgroundAttachment: "fixed"
         }}
       >
@@ -401,7 +401,7 @@ useEffect(() => {
       </section>
 
       {/* VIDEO SECTION */}
-      <section className="w-full min-h-screen py-24 bg-gradient-to-b from-gray-900 to-black text-white">
+      {/* <section className="w-full min-h-screen py-24 bg-gradient-to-b from-gray-900 to-black text-white">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal 
             showProgress={section4Show} 
@@ -458,7 +458,7 @@ useEffect(() => {
             </div>
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       {/* DRIP SECTION */}
       <section className="w-full min-h-screen">

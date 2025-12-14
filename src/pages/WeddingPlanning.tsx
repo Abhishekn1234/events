@@ -112,7 +112,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
         <motion.div
           className="absolute inset-0 bg-cover bg-center will-change-transform"
           style={{
-            backgroundImage: "url('/157c4193953156c29c314cc87f694946 (1).jpg')",
+            backgroundImage: "url('/bdfc27350c27ffe77e740171400824cd.jpg')",
             opacity: opacity,
             scale: scale,
             boxShadow: shadowValue,
@@ -164,7 +164,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               >
-                Wedding Planning
+                Wedding  Events
               </motion.h1>
             </motion.div>
             
@@ -223,7 +223,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
       </motion.section>
 
       {/* PLANNING & COORDINATION SECTION */}
-      <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
+      {/* <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
         <div className="max-w-6xl w-full">
           <ScrollReveal 
             showProgress={section2Show} 
@@ -278,7 +278,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
             </div>
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       {/* OUR PLANNING PROCESS SECTION */}
       <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
@@ -374,45 +374,107 @@ useMotionValueEvent(scrollY, "change", (current) => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {[
-                "Destination Weddings",
-                "Cultural Weddings",
-                "Beach & Outdoor",
-                "Luxury Weddings",
-                "Intimate / Micro Weddings",
-                "Themed Weddings",
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ y: 40, opacity: 0, rotateX: 10 }}
-                  whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    ease: "easeOut",
-                    delay: idx * 0.1 
-                  }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -5,
-                    transition: { duration: 0.3, ease: "easeOut" } 
-                  }}
-                  className="relative group will-change-transform"
-                >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-                  <div className="relative bg-gradient-to-b from-gray-900 to-black p-8 rounded-2xl border border-white/10 backdrop-blur-sm h-full">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors duration-300">
-                      {item}
-                    </h3>
-                    <motion.div
-                      className="mt-4 h-1 w-0 group-hover:w-full bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-500"
-                      initial={false}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+<div className="flex flex-col gap-12">
+  {[
+    { 
+      title: "Destination Weddings", 
+      img: "/desti.jpg",
+      points: [
+        "Exotic locations worldwide",
+        "Full-service planning and logistics",
+        "Custom experiences for couples and guests",
+      ]
+    },
+    { 
+      title: "Cultural Weddings", 
+      img: "/ebe565e4205ff7bc0143fea615e482bf.jpg",
+      points: [
+        "Traditional rituals and customs",
+        "Expert vendors familiar with cultural nuances",
+        "Authentic cuisine and decorations",
+      ]
+    },
+    { 
+      title: "Beach & Outdoor", 
+      img: "/beach.jpg",
+      points: [
+        "Scenic beach or garden venues",
+        "Flexible outdoor setups",
+        "Photography with natural light",
+      ]
+    },
+    { 
+      title: "Luxury Weddings", 
+      img: "/lux.jpg",
+      points: [
+        "Premium venues and services",
+        "Designer decor and styling",
+        "Exclusive experiences for VIP guests",
+      ]
+    },
+    { 
+      title: "Intimate / Micro Weddings", 
+      img: "/intim.jpg",
+      points: [
+        "Personalized experiences for small groups",
+        "Budget-friendly yet elegant",
+        "Focus on meaningful details",
+      ]
+    },
+    { 
+      title: "Themed Weddings", 
+      img: "/themed.jpg",
+      points: [
+        "Creative and unique concepts",
+        "Custom decor and attire",
+        "Immersive guest experiences",
+      ]
+    },
+  ].map((item, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 30, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+      className={`flex flex-col md:flex-row items-center gap-6 md:gap-12
+        ${idx % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+    >
+      {/* Image */}
+      <div className="w-full md:w-[500px] h-[370px] overflow-hidden rounded-lg relative">
+        <img
+          src={item.img}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-500 transform hover:scale-105 rounded-lg shadow-lg"
+        />
+        {/* Optional: subtle overlay on hover */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-10 transition-opacity duration-500 rounded-lg"></div>
+      </div>
+
+      {/* Text Content */}
+      <div className="w-full md:w-1/2 flex flex-col gap-3 text-left">
+        <h3 className="text-2xl md:text-3xl font-bold text-white transition-colors duration-300">
+          {item.title}
+        </h3>
+        {/* Points */}
+        <ul className="mt-3 list-disc list-inside space-y-1 text-white">
+          {item.points.map((point, pIdx) => (
+            <li key={pIdx} className="hover:text-orange-500 transition-colors duration-300">
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
+
+
+
+
+
           </ScrollReveal>
         </div>
       </section>
@@ -434,7 +496,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
               >
                 <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                 <img
-                  src="/5d9b09979a6c130497964b9d3c78b698.jpg"
+                  src="/1a5c9ed812ef79bb0eb41e9e12da0d94.jpg"
                   alt="Pre Wedding Events"
                   className="relative w-full rounded-2xl shadow-2xl object-cover h-80 md:h-96 transform transition-all duration-500 hover:scale-[1.02] will-change-transform"
                 />
@@ -559,7 +621,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
       </section>
 
       {/* WEDDING HIGHLIGHT VIDEO SECTION */}
-      <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-black to-gray-900">
+      {/* <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal 
             showProgress={section7Show} 
@@ -624,7 +686,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
             </motion.div>
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       {/* DRIP SECTION */}
       <section className="w-full min-h-screen">

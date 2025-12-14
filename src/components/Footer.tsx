@@ -3,10 +3,10 @@ import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0d0d0f] text-white pt-32 pb-16 overflow-hidden">
+    <footer className="relative bg-black text-white pt-32 pb-16 overflow-hidden">
 
       {/* Floating Stars (optional) */}
-      <div className="pointer-events-none absolute inset-0">
+      {/* <div className="pointer-events-none absolute inset-0">
         {Array.from({ length: 45 }).map((_, i) => (
           <div
             key={i}
@@ -17,7 +17,7 @@ export default function Footer() {
             }}
           ></div>
         ))}
-      </div>
+      </div> */}
 
       {/* MAIN CONTENT */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10">
