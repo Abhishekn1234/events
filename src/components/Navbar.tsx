@@ -198,7 +198,7 @@ export default function Navbar() {
 
                       {/* SERVICES DROPDOWN — MOBILE */}
                       <div className="mt-2">
-                        <button className="text-xl font-semibold hover:text-primary transition-all w-full text-left">
+                        <button className="text-xl font-semibold hover:text-primary transition-all w-full text-left"  onClick={() => navigation("/services")}>
                           Services
                         </button>
 
