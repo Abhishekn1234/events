@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import React, { useRef, ReactNode, JSX, useEffect } from "react";
+import React, { useRef, ReactNode, JSX, useEffect, useState } from "react";
 import DripSection from "./Drip";
 import { ExternalLinkIcon, PersonStanding, SquareTerminalIcon } from "lucide-react";
 
@@ -21,19 +21,18 @@ export default function Private() {
     restDelta: 0.001
   });
 
-  // Section triggers based on scroll position
-  const section1Show = useTransform(smoothProgress, [0, 0.1, 0.15], [0, 0, 1]);
-  const section2Show = useTransform(smoothProgress, [0.15, 0.25, 0.3], [0, 0, 1]);
-  const section3Show = useTransform(smoothProgress, [0.3, 0.4, 0.45], [0, 0, 1]);
-  const section4Show = useTransform(smoothProgress, [0.45, 0.55, 0.6], [0, 0, 1]);
-  const section5Show = useTransform(smoothProgress, [0.6, 0.7, 0.75], [0, 0, 1]);
-  const section6Show = useTransform(smoothProgress, [0.75, 0.85, 0.9], [0, 0, 1]);
+  // FIXED: Section triggers - removed the extra values that were delaying appearance
+  const section1Show = useTransform(smoothProgress, [0, 0.15], [0, 1]);
+  const section2Show = useTransform(smoothProgress, [0.15, 0.3], [0, 1]);
+  const section3Show = useTransform(smoothProgress, [0.3, 0.45], [0, 1]);
+  const section4Show = useTransform(smoothProgress, [0.45, 0.6], [0, 1]);
+  const section5Show = useTransform(smoothProgress, [0.6, 0.75], [0, 1]);
 
   // For tracking scroll direction
   const lastScrollY = useRef(0);
-  const [scrollDirection, setScrollDirection] = React.useState<'down' | 'up'>('down');
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrollDirection(currentScrollY > lastScrollY.current ? 'down' : 'up');
@@ -44,7 +43,7 @@ export default function Private() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll Reveal Component
+  // FIXED: Enhanced Scroll Reveal Component with immediate visibility
   const ScrollReveal = ({ 
     children, 
     showProgress, 
@@ -54,11 +53,23 @@ export default function Private() {
     showProgress: any;
     direction?: 'up' | 'down';
   }) => {
-    const opacity = useTransform(showProgress, [0, 1], [0, 1]);
+    const [isActive, setIsActive] = useState(false);
+    
+    // Track when progress starts
+    useEffect(() => {
+      const unsubscribe = showProgress.on("change", (latest: number) => {
+        if (latest > 0.05 && !isActive) {
+          setIsActive(true);
+        }
+      });
+      return unsubscribe;
+    }, [showProgress, isActive]);
+
+    const opacity = useTransform(showProgress, [0, 0.2, 1], [0, 1, 1]);
     const y = useTransform(showProgress, [0, 1], 
-      direction === 'up' ? [40, 0] : [-40, 0]
+      direction === 'up' ? [20, 0] : [-20, 0]
     );
-    const scale = useTransform(showProgress, [0, 1], [0.95, 1]);
+    const scale = useTransform(showProgress, [0, 0.3, 1], [0.98, 1, 1]);
     
     return (
       <motion.div 
@@ -66,14 +77,15 @@ export default function Private() {
           opacity, 
           y,
           scale,
+          visibility: isActive ? 'visible' as const : 'hidden' as const
         }}
         className="w-full"
+        initial={false}
       >
         {children}
       </motion.div>
     );
   };
-
 
   interface CardData {
     title: string;
@@ -87,8 +99,6 @@ export default function Private() {
     desc: string;
     icon: string | JSX.Element;
   }
-
- 
 
   const cardData: CardData[] = [
     {
@@ -144,13 +154,13 @@ export default function Private() {
       icon: <ExternalLinkIcon/>,
     },
   ];
-useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-}, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <div ref={containerRef} className="relative">
@@ -190,42 +200,42 @@ useEffect(() => {
         </motion.div>
       </section>
 
-      {/* OUR EXPERTISE SECTION */}
-      <section className="w-full min-h-screen py-24 bg-gradient-to-b from-black to-gray-900 text-center px-6">
+      {/* OUR EXPERTISE SECTION - FIXED: Removed extra margin/padding */}
+      <section className="w-full py-20 md:py-24 bg-gradient-to-b from-black to-gray-900 text-center px-6">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal 
             showProgress={section1Show} 
-            direction={scrollDirection === 'down' ? 'up' : 'down'}
+            direction="up"
           >
-            <div>
+            <div className="pt-6">
               <motion.h2
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5 }}
                 className="text-3xl md:text-5xl font-extrabold text-white mb-3"
               >
                 Our Expertise
               </motion.h2>
               <motion.h3
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-xl md:text-2xl text-orange-500 mb-14"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-xl md:text-2xl text-orange-500 mb-10 md:mb-14"
               >
                 Crafting Unforgettable Experiences, One Moment at a Time.
               </motion.h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {cardData.map((card, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: index * 0.2 }}
-                    className="group w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    className="group w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col bg-gray-900/50 border border-gray-800"
                   >
                     <div className="relative w-full h-48 md:h-60 overflow-hidden">
                       <img
@@ -262,47 +272,47 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* OUR PHILOSOPHY SECTION */}
-      <section className="w-full min-h-screen py-24 bg-gradient-to-b from-gray-900 to-black text-center px-6">
+      {/* OUR PHILOSOPHY SECTION - FIXED: Adjusted spacing */}
+      <section className="w-full py-20 md:py-24 bg-gradient-to-b from-gray-900 to-black text-center px-6">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal 
             showProgress={section2Show} 
-            direction={scrollDirection === 'down' ? 'up' : 'down'}
+            direction="up"
           >
-            <div>
+            <div className="pt-6">
               <motion.h2
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5 }}
                 className="text-3xl md:text-5xl font-extrabold text-white mb-3"
               >
                 Our Philosophy
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-lg md:text-2xl text-orange-500 mb-14 max-w-3xl mx-auto"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg md:text-2xl text-orange-500 mb-10 md:mb-14 max-w-3xl mx-auto"
               >
                 Why We Are The Right Partner for Your Event.
               </motion.p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {items.map((item, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: i * 0.2 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: i * 0.15 }}
                     className="relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-lg group p-6 text-left min-h-[380px] hover:border-orange-500/50 transition-all duration-500 flex flex-col"
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
 
                     <div className="relative z-10 flex flex-col h-full">
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex items-center gap-3 mb-4">
                         {typeof item.icon === 'string' ? (
                           <img 
                             src={item.icon} 
@@ -334,128 +344,15 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* EVENT HIGHLIGHTS SECTION */}
-      {/* <section className="w-full min-h-screen py-24 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal 
-            showProgress={section3Show} 
-            direction={scrollDirection === 'down' ? 'up' : 'down'}
-          >
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="text-center mb-16"
-              >
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  Event Highlights
-                </h2>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                  A glimpse into the memorable events we've crafted with passion and precision
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6">
-                {highlights.map((item, index) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group relative overflow-hidden rounded-2xl shadow-2xl"
-                  >
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <img
-                        src={item.img}
-                        alt="Event Highlight"
-                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="text-white text-center">
-                          <span className="text-sm font-semibold">View Details</span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section> */}
-
-      {/* VIDEO SECTION */}
-      {/* <section className="w-full min-h-screen py-24 bg-gradient-to-b from-gray-900 to-black text-white">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal 
-            showProgress={section4Show} 
-            direction={scrollDirection === 'down' ? 'up' : 'down'}
-          >
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="text-center mb-16"
-              >
-                <h2 className="text-4xl md:text-5xl font-extrabold text-orange-500 mb-4">
-                  Relive the Moments
-                </h2>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                  Experience the magic through our event highlight reels
-                </p>
-              </motion.div>
-
-              <div className="mb-16 px-6">
-                <div className="relative w-full pb-[56.25%] rounded-3xl overflow-hidden shadow-2xl group">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="Private Events Highlight Reel"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="max-w-3xl mx-auto text-center px-6 mb-12"
-              >
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  Ready to Plan Your Perfect Event?
-                </h3>
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                  Whether it's an intimate gathering or a grand private event, we're here to design an unforgettable
-                  experience tailored just for you. Share your vision with us today.
-                </p>
-
-                <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
-                  Plan Your Event
-                </button>
-              </motion.div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section> */}
-
-      {/* DRIP SECTION */}
-      <section className="w-full min-h-screen">
+      {/* DRIP SECTION - FIXED: Immediately visible */}
+      <section className="w-full py-20 md:py-24">
         <ScrollReveal 
-          showProgress={section5Show} 
-          direction={scrollDirection === 'down' ? 'up' : 'down'}
+          showProgress={section3Show} 
+          direction="up"
         >
-          <DripSection />
+          <div className="pt-6">
+            <DripSection />
+          </div>
         </ScrollReveal>
       </section>
     </div>

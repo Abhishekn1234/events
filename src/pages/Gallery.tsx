@@ -7,14 +7,14 @@ import useInView from "./useInhooks";
 
 // Example highlights array
 const highlights = [
- { id: 1, img: "/event highlights 4.jpg" },
-    { id: 2, img: "/luxury & lifestyle.jpg" },
-    { id: 3, img: "/luxury & lifestyle1.jpg" },
-    { id: 4, img: "/wedpic3.jpg" },
-    { id: 5, img: "/wedpic4.jpg" },
-    { id: 6, img: "/wedpic7.jpg" },
-    { id: 7, img: "/wedpic8.jpg" },
-    { id: 8, img: "/wedpic12.jpg" },
+ { id: 1, img: "/02c58ba48a80d5f9c332534c604c8bae.jpg" },
+    { id: 2, img: "/2d2cf0a1ff6064876469284d1b6eab0a.jpg" },
+    { id: 3, img: "/55f4f8f8be370f0df171bdc6a2ad9fa2.jpg" },
+    { id: 4, img: "/81f8591cf47e6735e225369e811ef1b6.jpg" },
+    { id: 5, img: "/3745ba9ab2653aef82888100fd2d7e3b.jpg" },
+    { id: 6, img: "/acf7eab196a5a3405e002c2a9ff46c83.jpg" },
+    { id: 7, img: "/f89eefe1e436d48a967752a097ad1d17.jpg" },
+    { id: 8, img: "/ebe565e4205ff7bc0143fea615e482bf.jpg" },
 ];
 
 export default function Gallery() {
