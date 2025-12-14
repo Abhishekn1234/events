@@ -1,235 +1,290 @@
+"use client";
+
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useInView,
+  useSpring,
+} from "framer-motion";
+
 import Events from "./Events";
 
-// -----------------------------
-// ANGLED BLOCK
-// -----------------------------
+/* ----------------------------------
+   THEMES
+---------------------------------- */
+/* ----------------------------------
+   ENHANCED ANGLED BLOCK
+---------------------------------- */
+
+// Enhanced theme with more properties
+interface ThemeType {
+  bg: string;
+  block: string;
+  glow: string;
+  text: string;
+  gradient: string[];
+  pattern: string;
+}
+
 interface AngledBlockProps {
   text: string;
-  color: string;
   rotateBase: number;
   index: number;
   isMobile: boolean;
 }
-const AngledBlock: React.FC<AngledBlockProps> = ({ text, color, rotateBase, index, isMobile }) => {
-  const ref = useRef(null);
+
+/* ================================
+   THEMES
+================================ */
+const ENHANCED_THEMES: ThemeType[] = [
+  {
+    bg: "#0A0A0F",
+    block: "#D4AF37",
+    glow: "rgba(212,175,55,0.6)",
+    text: "#000",
+    gradient: ["#D4AF37", "#F7EF8A", "#B8860B"],
+    pattern:
+      "radial-gradient(circle at 30% 20%, rgba(255,215,0,0.1) 0%, transparent 50%)",
+  },
+  {
+    bg: "#070B14",
+    block: "#6EE7F9",
+    glow: "rgba(110,231,249,0.6)",
+    text: "#001018",
+    gradient: ["#6EE7F9", "#A5F3FC", "#0EA5E9"],
+    pattern:
+      "radial-gradient(circle at 70% 30%, rgba(110,231,249,0.15) 0%, transparent 60%)",
+  },
+  {
+    bg: "#0B0616",
+    block: "#9F7AEA",
+    glow: "rgba(159,122,234,0.6)",
+    text: "#fff",
+    gradient: ["#9F7AEA", "#C4B5FD", "#7C3AED"],
+    pattern:
+      "radial-gradient(circle at 50% 80%, rgba(159,122,234,0.2) 0%, transparent 55%)",
+  },
+  {
+    bg: "#050505",
+    block: "#FF6B6B",
+    glow: "rgba(255,107,107,0.6)",
+    text: "#fff",
+    gradient: ["#FF6B6B", "#FFA8A8", "#E03131"],
+    pattern:
+      "radial-gradient(circle at 20% 60%, rgba(255,107,107,0.18) 0%, transparent 65%)",
+  },
+];
+
+/* ================================
+   ANGLED BLOCK
+================================ */
+const AngledBlock: React.FC<AngledBlockProps> = ({
+  text,
+  rotateBase,
+  index,
+  isMobile,
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const theme = ENHANCED_THEMES[index % ENHANCED_THEMES.length];
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Scroll-based animations
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+
   const scale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    isMobile ? [0.85, 1, 0.9] : [0.8, 1.08, 0.9]
+    isMobile ? [0.92, 1, 0.92] : [0.9, 1.04, 0.92]
   );
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    isMobile ? [0, 1, 0.7] : [0, 1, 0]
-  );
+
   const rotate = useTransform(
     scrollYProgress,
     [0, 1],
     [`${rotateBase - 4}deg`, `${rotateBase + 4}deg`]
   );
 
-  const textColor = "text-white";
-  const textShadowClass = "drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)]";
-
   return (
     <motion.div
       ref={ref}
-      style={{ scale, opacity, rotate }}
-      className={`
-        ${isMobile ? "w-[70vw] h-[60px]" : "w-[90vw] sm:w-[88vw] max-w-[680px] h-[80px] sm:h-[90px] md:h-[110px]"}
-        flex items-center justify-center absolute
+      style={{ scale, rotate }}
+      className={`relative
+        ${isMobile ? "w-[88vw] h-[70px]" : "w-[90vw] max-w-[760px] h-[120px]"}
+        rounded-[22px]
+       p-[0.75px]
+        bg-gradient-to-br from-white/12 via-white/5 to-transparent
+
       `}
-      initial={{ y: isMobile ? index * 50 : index * 70 }}
+      whileHover={{
+        scale: isMobile ? 1.02 : 1.05,
+        rotate: rotateBase + 2,
+      }}
     >
+      {/* Glass shell */}
       <div
-        style={{ backgroundColor: color }}
-        className={`w-full h-full flex items-center justify-center rounded-[6px] px-4`}
+        className="relative w-full h-full rounded-[20px] overflow-hidden backdrop-blur-xl"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.28))",
+        }}
       >
+        {/* Soft decorative orbs (NO shadow / NO blur) */}
         <div
-          className={`
-            ${textColor} 
-            ${isMobile ? "text-[22px]" : "text-[28px] sm:text-[36px] md:text-[44px] lg:text-[50px]"}
-            uppercase tracking-[2px] sm:tracking-[3px] md:tracking-[4px] 
-            font-black ${textShadowClass} leading-tight text-center
-            whitespace-nowrap overflow-hidden
-          `}
-        >
-          {text}
-        </div>
+          className="absolute w-28 h-28 rounded-full opacity-10"
+          style={{ background: theme.glow, top: "-35%", left: "8%" }}
+        />
+        <div
+          className="absolute w-36 h-36 rounded-full opacity-8"
+          style={{ background: theme.glow, bottom: "-45%", right: "5%" }}
+        />
+
+        {/* Main card */}
+        <motion.div
+  className="relative w-[96%] h-[85%] mx-auto my-auto rounded-[16px]
+             flex items-center justify-center overflow-hidden
+             border border-white/8"
+  style={{
+    background: `linear-gradient(135deg, ${theme.gradient.join(",")})`,
+  }}
+>
+
+          {/* Flat border shine (NO glow) */}
+          <motion.div
+            className="absolute inset-0 opacity-15 pointer-events-none"
+            animate={{ x: ["-120%", "120%"] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+            style={{
+              background:
+                "linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent)",
+            }}
+          />
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className={`relative z-10 uppercase font-black tracking-[3px]
+              ${isMobile ? "text-[20px]" : "text-[48px]"}
+              text-center select-none`}
+            style={{ color: theme.text }}
+          >
+            {text}
+          </motion.div>
+        </motion.div>
       </div>
     </motion.div>
   );
 };
 
 
-// -----------------------------
-// VIDEO PLACEHOLDER
-// -----------------------------
-const VideoPlaceholder = () => {
-  const textSegments = Array.from({ length: 4 }, (_, i) => ({
-    text: "PLAY VIDEO",
-    rotate: i * 90,
-  }));
+/* ----------------------------------
+   VIDEO PLACEHOLDER
+---------------------------------- */
+const VideoPlaceholder = () => (
+  <div className="absolute inset-0 flex items-center justify-center text-white/80">
+    PLAY VIDEO
+  </div>
+);
 
-  const PlayIcon = () => (
-    <div className="absolute z-20 w-0 h-0 border-t-[6px] sm:border-t-[8px] md:border-t-[10px] border-b-[6px] sm:border-b-[8px] md:border-b-[10px] border-l-[12px] sm:border-l-[15px] md:border-l-[18px] border-t-transparent border-b-transparent border-l-white ml-1" />
-  );
-
-  return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      <div className="absolute w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[80px] md:h-[80px] bg-white/10 rounded-full flex items-center justify-center z-10">
-        <PlayIcon />
-      </div>
-
-      {textSegments.map((segment, index) => (
-        <div
-          key={index}
-          className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] flex items-start justify-center text-white/80 font-serif tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px] text-[10px] sm:text-[11px] md:text-xs"
-          style={{ transform: `rotate(${segment.rotate}deg)` }}
-        >
-          <span
-            className="absolute top-[-5px] sm:top-[-8px] md:top-[-10px]"
-            style={{ transform: `rotate(-${segment.rotate}deg)` }}
-          >
-            {segment.text}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// -----------------------------
-// MAIN COMPONENT
-// -----------------------------
+/* ----------------------------------
+   MAIN COMPONENT
+---------------------------------- */
 const ScrollHighlight: React.FC = () => {
   const items = [
-    { text: "CUSTOM PLANS", color: "#BA8966", rotate: 4 },
-    { text: "BOLD IDEAS", color: "#F9EDE5", rotate: -3 },
-    { text: "SMOOTH FLOW", color: "#723126", rotate: 2 },
-    { text: "LASTING JOY", color: "#F9D860", rotate: -4 },
+    { text: "CUSTOM PLANS", rotate: 4 },
+    { text: "BOLD IDEAS", rotate: -3 },
+    { text: "SMOOTH FLOW", rotate: 2 },
+    { text: "LASTING JOY", rotate: -4 },
   ];
 
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const resize = () => setIsMobile(window.innerWidth < 640);
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
-  const [sectionRef, sectionInView] = useInView({
-    threshold: isMobile ? 0.1 : 0.3,
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionInView = useInView(sectionRef, {
+    amount: isMobile ? 0.1 : 0.3,
   });
 
   const videoRef = useRef<HTMLDivElement>(null);
-
   const { scrollYProgress } = useScroll({
     target: videoRef,
     offset: ["start end", "center center"],
   });
 
-  const width = useTransform(scrollYProgress, [0, 1], [isMobile ? "120px" : "150px", "100%"]);
-  const height = useTransform(scrollYProgress, [0, 1], [isMobile ? "120px" : "150px", "300px"]);
+  const width = useTransform(scrollYProgress, [0, 1], ["150px", "100%"]);
+  const height = useTransform(scrollYProgress, [0, 1], ["150px", "300px"]);
   const borderRadius = useTransform(scrollYProgress, [0, 1], ["50%", "12px"]);
-  const placeholderOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 1, 0]);
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 1], ["#181818", "#181818", "transparent"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <div
       ref={sectionRef}
-      className="w-full flex flex-col items-center bg-black py-12 md:py-16 lg:py-20 relative space-y-8 md:space-y-12"
+      className="w-full bg-black py-16 flex flex-col items-center space-y-16"
     >
-      {/* HEADING */}
-      <div className="text-center space-y-1 px-4 max-w-4xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-          Experience the Difference:
+      {/* Headings */}
+      <div className="text-center space-y-2">
+        <h2 className="text-4xl font-bold text-white">
+          Experience the Difference
         </h2>
-        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300">
-          Why Choose Aalizah Events
-        </h3>
+        <p className="text-gray-400 text-xl">Why Choose Aalizah Events</p>
       </div>
 
-      {/* ANGLED CARDS */}
-      <div className="h-[80vh] sm:h-[90vh] md:h-[100vh] w-full flex justify-center relative">
-        <div className="relative h-[350px] sm:h-[400px] md:h-[450px] w-full max-w-[90vw] sm:max-w-[85vw] md:max-w-[700px]">
+      {/* Angled blocks */}
+      <div className="relative h-[90vh] w-full flex justify-center">
+        <div className="relative w-full max-w-[800px] space-y-6">
           {items.map((item, i) => (
             <AngledBlock
               key={i}
               text={item.text}
-              color={item.color}
-              index={i}
               rotateBase={item.rotate}
+              index={i}
               isMobile={isMobile}
             />
           ))}
         </div>
       </div>
 
-      {/* "And More..." */}
-      <div className="text-xl sm:text-2xl md:text-3xl text-gray-300 mt-[-60px] sm:mt-[-90px] md:mt-[-120px] text-center">
-        And More...
-      </div>
-
-      {/* VIDEO SCROLL */}
-      <div className="w-full flex justify-center mt-8 md:mt-10 mb-16 md:mb-20 min-h-[300px] md:min-h-[400px] px-4">
-        <div ref={videoRef} className="w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[900px] relative">
-          <AnimatePresence mode="wait">
-            {sectionInView && (
+      {/* Video */}
+      <div ref={videoRef} className="w-full flex justify-center min-h-[320px]">
+        <AnimatePresence>
+          {sectionInView && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
               <motion.div
-                key="videoBox"
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.4,
-                  x: 200,
-                  y: 200,
-                  transition: { duration: 0.8 },
-                }}
-                transition={{ duration: 0.8 }}
-                className="absolute inset-0 flex justify-center items-center"
+                style={{ width, height, borderRadius }}
+                className="bg-[#181818] overflow-hidden relative shadow-2xl"
               >
-                <motion.div
-                  style={{ width, height, borderRadius, backgroundColor }}
-                  className="overflow-hidden shadow-2xl relative mx-auto"
-                >
-                  <motion.div style={{ opacity: placeholderOpacity }} className="absolute inset-0 z-30">
-                    <VideoPlaceholder />
-                  </motion.div>
-
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                    title="YouTube video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
+                <motion.div style={{ opacity }}>
+                  <VideoPlaceholder />
                 </motion.div>
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* EVENTS SECTION */}
+      {/* Events */}
       <Events />
     </div>
   );
 };
 
 export default ScrollHighlight;
+
