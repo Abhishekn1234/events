@@ -231,6 +231,16 @@ export default function Navbar() {
                         </div>
                       </div>
                     </div>
+                     <Button
+  onClick={() => {
+    navigation("/contact");
+    setIsSheetOpen(false);
+  }}
+  className="mt-10 w-full bg-primary text-white py-4 rounded-xl text-lg font-semibold hover:bg-primary/80 transition-all"
+>
+  Contact Us
+</Button>
+
 
                     {/* MOBILE SOCIAL ICONS */}
                     <div className="flex justify-center space-x-6 mt-10">
