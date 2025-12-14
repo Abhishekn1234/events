@@ -281,76 +281,7 @@ useMotionValueEvent(scrollY, "change", (current) => {
       </section> */}
 
       {/* OUR PLANNING PROCESS SECTION */}
-      <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal 
-            showProgress={section3Show} 
-            direction={scrollDirection === 'down' ? 'up' : 'down'}
-          >
-            <motion.div 
-              className="text-center mb-20"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400">
-                Our Planning Process
-              </h2>
-              <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                We believe in a stress-free journey. Our process is designed to be 
-                collaborative and transparent, ensuring your vision comes to life.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { 
-                  num: "01", 
-                  title: "Discovery & Vision", 
-                  desc: "We start with a detailed consultation to understand your unique story, style, and what you envision for your big day.",
-                  color: "from-orange-500 to-yellow-500"
-                },
-                { 
-                  num: "02", 
-                  title: "Design & Logistics", 
-                  desc: "We craft a comprehensive plan, from vendor selection and budget management to a detailed timeline and creative design.",
-                  color: "from-yellow-500 to-orange-500"
-                },
-                { 
-                  num: "03", 
-                  title: "Execution & Celebration", 
-                  desc: "On your wedding day, we handle every detail so you can relax, be present, and celebrate with the people you love most.",
-                  color: "from-orange-600 to-yellow-600"
-                },
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ y: 60, opacity: 0, scale: 0.9 }}
-                  whileInView={{ y: 0, opacity: 1, scale: 1 }}
-                  transition={{ 
-                    duration: 0.6, 
-                    ease: "easeOut",
-                    delay: idx * 0.15 
-                  }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -10, transition: { duration: 0.3, ease: "easeOut" } }}
-                  className="relative group will-change-transform"
-                >
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${item.color} rounded-3xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300`} />
-                  <div className="relative bg-gradient-to-b from-gray-900 to-black p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
-                    <span className={`text-6xl font-black bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
-                      {item.num}
-                    </span>
-                    <h3 className="mt-6 text-2xl font-bold text-white">{item.title}</h3>
-                    <p className="mt-4 text-white/80 leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+     
 
       {/* WEDDING TYPES SECTION */}
       <section className="w-full min-h-screen py-24 px-6 bg-black">
@@ -478,7 +409,76 @@ useMotionValueEvent(scrollY, "change", (current) => {
           </ScrollReveal>
         </div>
       </section>
+    <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal 
+            showProgress={section3Show} 
+            direction={scrollDirection === 'down' ? 'up' : 'down'}
+          >
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400">
+                Our Planning Process
+              </h2>
+              <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                We believe in a stress-free journey. Our process is designed to be 
+                collaborative and transparent, ensuring your vision comes to life.
+              </p>
+            </motion.div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { 
+                  num: "01", 
+                  title: "Discovery & Vision", 
+                  desc: "We start with a detailed consultation to understand your unique story, style, and what you envision for your big day.",
+                  color: "from-orange-500 to-yellow-500"
+                },
+                { 
+                  num: "02", 
+                  title: "Design & Logistics", 
+                  desc: "We craft a comprehensive plan, from vendor selection and budget management to a detailed timeline and creative design.",
+                  color: "from-yellow-500 to-orange-500"
+                },
+                { 
+                  num: "03", 
+                  title: "Execution & Celebration", 
+                  desc: "On your wedding day, we handle every detail so you can relax, be present, and celebrate with the people you love most.",
+                  color: "from-orange-600 to-yellow-600"
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ y: 60, opacity: 0, scale: 0.9 }}
+                  whileInView={{ y: 0, opacity: 1, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    ease: "easeOut",
+                    delay: idx * 0.15 
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -10, transition: { duration: 0.3, ease: "easeOut" } }}
+                  className="relative group will-change-transform"
+                >
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${item.color} rounded-3xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300`} />
+                  <div className="relative bg-gradient-to-b from-gray-900 to-black p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
+                    <span className={`text-6xl font-black bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                      {item.num}
+                    </span>
+                    <h3 className="mt-6 text-2xl font-bold text-white">{item.title}</h3>
+                    <p className="mt-4 text-white/80 leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
       {/* PRE-WEDDING EVENTS SECTION */}
       <section className="w-full min-h-screen py-24 px-6 bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-6xl mx-auto">
