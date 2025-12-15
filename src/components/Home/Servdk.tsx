@@ -40,43 +40,47 @@ interface AngledBlockProps {
    THEMES
 ================================ */
 const ENHANCED_THEMES: ThemeType[] = [
+  // 👑 Champagne Gold (Luxury Wedding)
   {
-    bg: "#0A0A0F",
-    block: "#D4AF37",
-    glow: "rgba(212,175,55,0.6)",
-    text: "#000",
-    gradient: ["#D4AF37", "#F7EF8A", "#B8860B"],
-    pattern:
-      "radial-gradient(circle at 30% 20%, rgba(255,215,0,0.1) 0%, transparent 50%)",
+    bg: "transparent",
+    block: "#E6C27A",
+    glow: "rgba(230,194,122,0.35)",
+    text: "#E6C27A",
+    gradient: ["#F3E7C3", "#E6C27A", "#BFA25A"],
+    pattern: "none",
   },
+
+  // 🫧 Pearl Blue (Engagement / Reception)
   {
-    bg: "#070B14",
-    block: "#6EE7F9",
-    glow: "rgba(110,231,249,0.6)",
-    text: "#001018",
-    gradient: ["#6EE7F9", "#A5F3FC", "#0EA5E9"],
-    pattern:
-      "radial-gradient(circle at 70% 30%, rgba(110,231,249,0.15) 0%, transparent 60%)",
+    bg: "transparent",
+    block: "#9AD7E8",
+    glow: "rgba(154,215,232,0.35)",
+    text: "#9AD7E8",
+    gradient: ["#D9F2F8", "#9AD7E8", "#5BB8D9"],
+    pattern: "none",
   },
+
+  // 🌷 Soft Lilac (Romantic Evenings)
   {
-    bg: "#0B0616",
-    block: "#9F7AEA",
-    glow: "rgba(159,122,234,0.6)",
-    text: "#fff",
-    gradient: ["#9F7AEA", "#C4B5FD", "#7C3AED"],
-    pattern:
-      "radial-gradient(circle at 50% 80%, rgba(159,122,234,0.2) 0%, transparent 55%)",
+    bg: "transparent",
+    block: "#C9B8F2",
+    glow: "rgba(201,184,242,0.35)",
+    text: "#C9B8F2",
+    gradient: ["#EDE7FA", "#C9B8F2", "#9B8AE0"],
+    pattern: "none",
   },
+
+  // 🍷 Rose Wine (Celebration / Party)
   {
-    bg: "#050505",
-    block: "#FF6B6B",
-    glow: "rgba(255,107,107,0.6)",
-    text: "#fff",
-    gradient: ["#FF6B6B", "#FFA8A8", "#E03131"],
-    pattern:
-      "radial-gradient(circle at 20% 60%, rgba(255,107,107,0.18) 0%, transparent 65%)",
+    bg: "transparent",
+    block: "#E8A1A8",
+    glow: "rgba(232,161,168,0.35)",
+    text: "#E8A1A8",
+    gradient: ["#F6D2D6", "#E8A1A8", "#C86B74"],
+    pattern: "none",
   },
 ];
+
 
 /* ================================
    ANGLED BLOCK
@@ -143,40 +147,60 @@ const AngledBlock: React.FC<AngledBlockProps> = ({
           style={{ background: theme.glow, bottom: "-45%", right: "5%" }}
         />
 
-        {/* Main card */}
-        <motion.div
-  className="relative w-[96%] h-[85%] mx-auto my-auto rounded-[16px]
+<motion.div
+  className="relative w-[96%] h-[85%] mx-auto my-auto rounded-[18px]
              flex items-center justify-center overflow-hidden
-             border border-white/8"
+             backdrop-blur-xl"
   style={{
-    background: `linear-gradient(135deg, ${theme.gradient.join(",")})`,
+    background: "rgba(255,255,255,0.04)",
   }}
 >
+  {/* Smooth gradient ring */}
+  <div
+    className="absolute inset-0 rounded-[18px] pointer-events-none"
+    style={{
+      padding: "1.2px",
+      background: `linear-gradient(135deg, ${theme.gradient.join(",")})`,
+      WebkitMask:
+        "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+      WebkitMaskComposite: "xor",
+      maskComposite: "exclude",
+    }}
+  />
 
-          {/* Flat border shine (NO glow) */}
-          <motion.div
-            className="absolute inset-0 opacity-15 pointer-events-none"
-            animate={{ x: ["-120%", "120%"] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-            style={{
-              background:
-                "linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent)",
-            }}
-          />
+  {/* Subtle inner light sweep */}
+  <motion.div
+    className="absolute inset-0 opacity-15 pointer-events-none"
+    animate={{ x: ["-120%", "120%"] }}
+    transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+    style={{
+      background:
+        "linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent)",
+    }}
+  />
 
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className={`relative z-10 uppercase font-black tracking-[3px]
-              ${isMobile ? "text-[20px]" : "text-[48px]"}
-              text-center select-none`}
-            style={{ color: theme.text }}
-          >
-            {text}
-          </motion.div>
-        </motion.div>
+  {/* Highlighted Text */}
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={inView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    className={`relative z-10 uppercase font-bold tracking-[3.5px]
+      ${isMobile ? "text-[21px]" : "text-[50px]"}
+      text-center select-none`}
+    style={{
+      backgroundImage: `linear-gradient(135deg, ${theme.gradient.join(",")})`,
+      WebkitBackgroundClip: "text",
+      color: "transparent",
+      textShadow: `
+        0 0 10px ${theme.glow}
+      `,
+    }}
+  >
+    {text}
+  </motion.div>
+</motion.div>
+
+
       </div>
     </motion.div>
   );
@@ -196,12 +220,13 @@ const VideoPlaceholder = () => (
    MAIN COMPONENT
 ---------------------------------- */
 const ScrollHighlight: React.FC = () => {
-  const items = [
-    { text: "CUSTOM PLANS", rotate: 4 },
-    { text: "BOLD IDEAS", rotate: -3 },
-    { text: "SMOOTH FLOW", rotate: 2 },
-    { text: "LASTING JOY", rotate: -4 },
-  ];
+const items = [
+  { text: "DREAM WEDDINGS", rotate: 4 },
+  { text: "STYLISH CELEBRATIONS", rotate: -3 },
+  { text: "SEAMLESS PLANNING", rotate: 2 },
+  { text: "LASTING MEMORIES", rotate: -4 },
+];
+
 
   const [isMobile, setIsMobile] = useState(false);
 

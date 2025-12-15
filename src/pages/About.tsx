@@ -218,10 +218,11 @@ export default function About() {
                 {/* Aspect ratio 16:9 rectangular image */}
               <AspectRatio ratio={11 / 9} className="overflow-hidden rounded-2xl">
       <img
-        src="/shdh.jpg"
+        src="/Connecting, collaborating, and cultivating new opportunities.jpg"
         alt="About section image"
         className="h-full w-full object-cover"
       />
+      {/* /shdh.jpg */}
     </AspectRatio>
 
                 {/* Image Caption - Only shows when in view */}

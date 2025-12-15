@@ -58,7 +58,7 @@ export default function Footer() {
           {/* Email Input Line */}
           <div>
             <div className="flex items-center gap-4">
-              <img src="/gold-feather.png" alt="" className="w-10 h-10 object-contain" /> 
+              <img src="/gold-feather.jpg" alt="" className="w-10 h-10 object-contain" /> 
               <input
                 type="email"
                 placeholder="Enter your email"
