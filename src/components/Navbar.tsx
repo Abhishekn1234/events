@@ -58,7 +58,7 @@ export default function Navbar() {
   onClick={() => navigation("/")}
 >
   <img
-    src="/Aaliza Logo (2).svg"
+    src="/Aaliza logo white.svg"
     alt="Aaliza Technologies Logo"
     className="h-12 w-auto sm:h-16"
   />

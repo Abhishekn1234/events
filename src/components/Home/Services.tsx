@@ -234,7 +234,7 @@ const ServicesSection: FC = () => {
           title: "Corporate Events",
         },
         {
-          src: "/private parties home.jpg",
+          src: "/private parties home1.jpg",
           title: "Private Parties",
         },
         {
