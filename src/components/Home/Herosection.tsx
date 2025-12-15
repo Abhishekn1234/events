@@ -48,12 +48,12 @@ const HeroSection: FC<HeroSectionProps> = ({ onPlanClick }) => {
           where every event becomes an unforgettable experience.
         </p>
 
-        <button
+        {/* <button
           onClick={onPlanClick}
           className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-10 py-4 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105"
         >
           PLAN MY WEDDING
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -79,7 +79,7 @@ export default function Corporate() {
         "Annual Dinners & Gala Nights",
         "Award Ceremonies",
       ],
-      image: "/business & networking.jpg",
+      image: "/BUSINESS AND NETWORKING.jpg",
     },
     {
       title: "Team Engagement",

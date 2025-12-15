@@ -54,13 +54,16 @@ export default function Navbar() {
 
             {/* Logo */}
             <div
-              className="flex-shrink-0 cursor-pointer"
-              onClick={() => navigation("/")}
-            >
-              <h1 className="text-3xl font-extrabold text-white hover:text-primary transition-all">
-                Aalizah Events
-              </h1>
-            </div>
+  className="flex-shrink-0 cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
+  onClick={() => navigation("/")}
+>
+  <img
+    src="/Aaliza Logo (2).svg"
+    alt="Aaliza Technologies Logo"
+    className="h-12 w-auto sm:h-16"
+  />
+</div>
+
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-8">
